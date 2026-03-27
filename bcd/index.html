@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Services & Schemes | Legal Aid India</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="schemes-header">
+    <nav class="schemes-nav">
+      <a class="logo" href="../legal aid/">← Back to Home</a>
+      <a class="btn-login" href="#" onclick="showToast('Login / Sign Up coming soon!')">🔒 Login / Sign Up</a>
+    </nav>
+    <div class="schemes-hero">
+      <div class="hero-icon">📜</div>
+      <div>
+        <h1>Government <span>Services & Schemes</span></h1>
+        <p>Discover welfare schemes, financial aid programs, and government services available to you.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="schemes-main">
+    <div class="schemes-controls">
+      <input type="text" id="schemeSearch" placeholder="Search schemes by name, category, or keyword..." />
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all" onclick="filterChips('all')">All</button>
+        <button class="chip" data-filter="education" onclick="filterChips('education')">Education</button>
+        <button class="chip" data-filter="health" onclick="filterChips('health')">Health</button>
+        <button class="chip" data-filter="finance" onclick="filterChips('finance')">Finance</button>
+        <button class="chip" data-filter="employment" onclick="filterChips('employment')">Employment</button>
+        <button class="chip" data-filter="women" onclick="filterChips('women')">Women & Child</button>
+        <button class="chip" data-filter="agriculture" onclick="filterChips('agriculture')">Agriculture</button>
+      </div>
+    </div>
+
+    <section class="schemes-grid" id="schemesGrid">
+      <article class="scheme-card" data-category="employment">
+        <div class="scheme-icon">🎓</div>
+        <div class="scheme-tag">Employment</div>
+        <h2>PM Internship Scheme</h2>
+        <p>Offers internship placements in top 500 organisations for college students with practical work exposure.</p>
+        <p class="scheme-meta">Eligibility: Indian students & graduates; age 21-24.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Internship Scheme')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="finance">
+        <div class="scheme-icon">🚀</div>
+        <div class="scheme-tag">Finance</div>
+        <h2>Startup India</h2>
+        <p>Funding, tax benefits, and incubation support for eligible start-ups and entrepreneurs nationwide.</p>
+        <p class="scheme-meta">Eligibility: Registered as Private Ltd, LLP, or Partnership.</p>
+        <a class="card-link" href="#" onclick="viewDetails('Startup India')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="health">
+        <div class="scheme-icon">🏥</div>
+        <div class="scheme-tag">Health</div>
+        <h2>Ayushman Bharat</h2>
+        <p>Health insurance cover up to ₹5 lakh per family for low-income groups under SECC 2011 advice.</p>
+        <p class="scheme-meta">Eligibility: SECC 2011 registered families with below 5 lakh income.</p>
+        <a class="card-link" href="#" onclick="viewDetails('Ayushman Bharat')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="education">
+        <div class="scheme-icon">💻</div>
+        <div class="scheme-tag">Education</div>
+        <h2>Digital India</h2>
+        <p>A comprehensive programme to transform India into a digitally empowered society with focus on digital infrastructure and literacy.</p>
+        <p class="scheme-meta">Eligibility: All Indian citizens and organisations.</p>
+        <a class="card-link" href="#" onclick="viewDetails('Digital India')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="education">
+        <div class="scheme-icon">📚</div>
+        <div class="scheme-tag">Education</div>
+        <h2>National Scholarship Portal</h2>
+        <p>One-stop platform offering central and state scholarships for students from pre-matric to PhD levels.</p>
+        <p class="scheme-meta">Eligibility: Students based on merit and income categories.</p>
+        <a class="card-link" href="#" onclick="viewDetails('National Scholarship Portal')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="women">
+        <div class="scheme-icon">🔥</div>
+        <div class="scheme-tag">Women & Child</div>
+        <h2>PM Ujjwala Yojana</h2>
+        <p>Provides free LPG connections to women from below-poverty-line households for clean cooking fuel.</p>
+        <p class="scheme-meta">Eligibility: Women from BPL households aged 18+.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Ujjwala Yojana')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="agriculture">
+        <div class="scheme-icon">🌱</div>
+        <div class="scheme-tag">Agriculture</div>
+        <h2>PM Fasal Bima Yojana</h2>
+        <p>Crop insurance scheme protecting farmers against crop loss due to natural calamities and pests.</p>
+        <p class="scheme-meta">Eligibility: Farmers growing notified crops in notified areas.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Fasal Bima Yojana')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="finance">
+        <div class="scheme-icon">💰</div>
+        <div class="scheme-tag">Finance</div>
+        <h2>PM Mudra Yojana</h2>
+        <p>Provides loans up to ₹10 lakh to non-corporate, non-farm small/micro enterprises for income generation.</p>
+        <p class="scheme-meta">Eligibility: Non-farm small business owners and entrepreneurs.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Mudra Yojana')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="employment">
+        <div class="scheme-icon">👷</div>
+        <div class="scheme-tag">Employment</div>
+        <h2>MGNREGA</h2>
+        <p>The Mahatma Gandhi National Rural Employment Guarantee Act guarantees 100 days of wage employment per year in rural areas.</p>
+        <p class="scheme-meta">Eligibility: Adult members of rural households with job card.</p>
+        <a class="card-link" href="#" onclick="viewDetails('MGNREGA')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="finance">
+        <div class="scheme-icon">🏠</div>
+        <div class="scheme-tag">Finance</div>
+        <h2>PM Awas Yojana</h2>
+        <p>Affordable housing for eligible urban and rural families with subsidy assistance.</p>
+        <p class="scheme-meta">Eligibility: EWS/LIG families with income up to ₹6 lakh.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Awas Yojana')">View Details →</a>
+      </article>
+
+      <article class="scheme-card" data-category="agriculture">
+        <div class="scheme-icon">🌾</div>
+        <div class="scheme-tag">Agriculture</div>
+        <h2>PM Kisan Samman Nidhi</h2>
+        <p>Income support for small and marginal farmers, disbursed in three instalments annually.</p>
+        <p class="scheme-meta">Eligibility: Farmers with cultivable land as per state norms.</p>
+        <a class="card-link" href="#" onclick="viewDetails('PM Kisan Samman Nidhi')">View Details →</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="schemes-footer">
+    <p>© 2025 Legal Aid India. All rights reserved. Not a substitute for professional legal advice.</p>
+  </footer>
+
+  <!-- Scheme detail modal -->
+  <div class="scheme-modal-overlay" id="schemeModalOverlay" onclick="closeSchemeModal(event)">
+    <div class="scheme-modal" id="schemeModal" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeSchemeModal(null, true)">✕</button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modalIcon"></div>
+        <div>
+          <span class="modal-category-tag" id="modalCategory"></span>
+          <h2 id="modalTitle"></h2>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Description</h3>
+          <p id="modalDescription"></p>
+        </div>
+        <div class="modal-section">
+          <h3>Benefits</h3>
+          <ul id="modalBenefits"></ul>
+        </div>
+        <div class="modal-section">
+          <h3>Eligibility</h3>
+          <ul id="modalEligibility"></ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn-apply-now" id="modalApplyLink" href="#" target="_blank">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

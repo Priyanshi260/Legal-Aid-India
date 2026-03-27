@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Aid India — Find Laws, Rights &amp; Schemes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-emblem">⚖️</div>
+      <div>
+        <div class="logo-text">Legal Aid India</div>
+        <span class="logo-sub">Justice For All</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><div class="nav-divider"></div></li>
+      <li><button class="btn-nav-login" onclick="showToast('Login / Sign Up coming soon!')">🔒 Login / Sign Up</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge anim-fade-up anim-delay-1">Free Legal Guidance for Every Indian</div>
+    <h1 class="hero-title anim-fade-up anim-delay-2">Your Legal Rights,<br/><span>Simplified &amp; Accessible</span></h1>
+    <p class="hero-subtitle anim-fade-up anim-delay-3">Find laws, government schemes, and verified lawyers — all in one place, in your language, for your situation.</p>
+
+    <div class="search-container anim-fade-up anim-delay-4">
+      <div class="search-bar">
+        <div class="search-field">
+          <span class="field-icon">🔍</span>
+          <input type="text" id="searchQuery" placeholder="Enter your legal issue or situation (e.g. tenant rights, divorce, property dispute)" autocomplete="off"/>
+        </div>
+        <div class="search-field location-field">
+          <span class="field-icon">📍</span>
+          <input type="text" id="locationInput" placeholder="Your Location" autocomplete="off"/>
+        </div>
+        <button class="btn-search" onclick="handleSearch()">Find Laws, Rights &amp; Schemes</button>
+      </div>
+    </div>
+
+    <div class="quick-actions anim-fade-up anim-delay-5">
+      <button class="qa-card" onclick="quickAction('situation')">
+        <div class="qa-icon-wrap">🤔</div>
+        <div><div class="qa-title">Ask a Situation</div><div class="qa-desc">Describe what happened — get instant guidance</div></div>
+        <span class="qa-arrow">→</span>
+      </button>
+      <button class="qa-card" onclick="quickAction('topics')">
+        <div class="qa-icon-wrap">📚</div>
+        <div><div class="qa-title">Browse Legal Topics</div><div class="qa-desc">Explore laws by category and subject</div></div>
+        <span class="qa-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main-section">
+  <div class="section-heading">Quick Access</div>
+  <div class="main-grid">
+
+    <div class="card card-gov anim-fade-up anim-delay-1" onclick="window.location.href='../bcd/index.html'">
+      <div class="gov-illustration">📜</div>
+      <div class="gov-content">
+        <div class="card-tag">500+ Schemes Available</div>
+        <h2>Government<br/>Schemes</h2>
+        <p>Discover welfare schemes and financial aid programs available to you based on your situation, income, caste, and state of residence.</p>
+        <div class="card-cta">Explore Schemes &nbsp;→</div>
+      </div>
+    </div>
+
+    <div class="card card-rights anim-fade-up anim-delay-2" onclick="openSection('rights')">
+      <div class="card-horiz">
+        <div class="card-thumb"><span class="thumb-emoji">👩‍⚖️</span><span class="thumb-label">Rights</span></div>
+        <div class="card-body">
+          <h3>Know Your Rights</h3>
+          <p>Empower yourself with clear, jargon-free knowledge of your legal rights as an Indian citizen. Understand what the Constitution guarantees you.</p>
+          <span class="card-link">Learn More →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-lawyer anim-fade-up anim-delay-3" onclick="openSection('lawyer')">
+      <div class="card-horiz">
+        <div class="card-thumb lawyer-thumb"><span class="thumb-emoji">🤝</span><span class="thumb-label">Lawyers</span></div>
+        <div class="card-body">
+          <h3>Find a Lawyer</h3>
+          <p>Connect with verified, Bar Council–registered legal professionals near you. Filter by specialisation, language, city, and fees.</p>
+          <span class="card-link">Find Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-header"><h4>Popular Legal Topics</h4><span class="badge-count">80+</span></div>
+        <ul class="topic-list">
+          <li class="topic-item" onclick="selectTopic('Consumer Rights')"><div class="topic-icon-wrap t1">🛒</div><span class="topic-name">Consumer Rights</span><span class="topic-arrow">›</span></li>
+          <li class="topic-item" onclick="selectTopic('Property Law')"><div class="topic-icon-wrap t2">🏠</div><span class="topic-name">Property Law</span><span class="topic-arrow">›</span></li>
+          <li class="topic-item" onclick="selectTopic('Family Law')"><div class="topic-icon-wrap t3">👨‍👩‍👧</div><span class="topic-name">Family Law</span><span class="topic-arrow">›</span></li>
+          <li class="topic-item" onclick="selectTopic('Criminal Law')"><div class="topic-icon-wrap t4">⚖️</div><span class="topic-name">Criminal Law</span><span class="topic-arrow">›</span></li>
+          <li class="topic-item" onclick="selectTopic('Labour Rights')"><div class="topic-icon-wrap t5">👷</div><span class="topic-name">Labour Rights</span><span class="topic-arrow">›</span></li>
+          <li class="topic-item" onclick="selectTopic('RTI')"><div class="topic-icon-wrap t6">📄</div><span class="topic-name">RTI</span><span class="topic-arrow">›</span></li>
+        </ul>
+      </div>
+      <div class="sidebar-card help-card">
+        <span class="help-emoji">🆘</span>
+        <h4>Need Urgent Help?</h4>
+        <p>Get immediate free legal aid from NALSA-empanelled lawyers across India.</p>
+        <button class="btn-help" onclick="getEmergencyHelp()">Get Emergency Legal Aid</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- FEATURED TOPICS -->
+<div class="featured-section">
+  <div class="section-title-row">
+    <h2 class="section-title">Browse <span>Legal Topics</span></h2>
+    <a href="#" class="view-all-link" onclick="showToast('View All Topics — coming soon!')">View All →</a>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card" onclick="browseTopic('Consumer Rights')"><span class="topic-card-icon">🛒</span><div class="topic-card-name">Consumer Rights</div><div class="topic-card-count">142 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Property Law')"><span class="topic-card-icon">🏠</span><div class="topic-card-name">Property Law</div><div class="topic-card-count">218 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Family Law')"><span class="topic-card-icon">👨‍👩‍👧</span><div class="topic-card-name">Family Law</div><div class="topic-card-count">176 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Criminal Law')"><span class="topic-card-icon">⚖️</span><div class="topic-card-name">Criminal Law</div><div class="topic-card-count">203 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Labour Rights')"><span class="topic-card-icon">👷</span><div class="topic-card-name">Labour Rights</div><div class="topic-card-count">98 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Cyber Law')"><span class="topic-card-icon">💻</span><div class="topic-card-name">Cyber Law</div><div class="topic-card-count">64 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('RTI')"><span class="topic-card-icon">📄</span><div class="topic-card-name">RTI</div><div class="topic-card-count">57 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Women\'s Rights')"><span class="topic-card-icon">👩</span><div class="topic-card-name">Women's Rights</div><div class="topic-card-count">134 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Environment Law')"><span class="topic-card-icon">🌿</span><div class="topic-card-name">Environment Law</div><div class="topic-card-count">49 articles</div></div>
+    <div class="topic-card" onclick="browseTopic('Taxation Law')"><span class="topic-card-icon">🧾</span><div class="topic-card-name">Taxation Law</div><div class="topic-card-count">87 articles</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="#" class="logo"><div class="logo-emblem">⚖️</div><div><div class="logo-text">Legal Aid India</div><span class="logo-sub">Justice For All</span></div></a>
+      <p>Empowering every Indian citizen with free, accessible, and understandable legal information in their own language.</p>
+      <div class="social-icons">
+        <button class="social-btn" onclick="showToast('Facebook')">f</button>
+        <button class="social-btn" onclick="showToast('X / Twitter')">𝕏</button>
+        <button class="social-btn" onclick="showToast('Instagram')">📸</button>
+        <button class="social-btn" onclick="showToast('YouTube')">▶</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul><li><a href="#">🏛️ Home</a></li><li><a href="#">📖 About Us</a></li><li><a href="#">📞 Contact</a></li><li><a href="#">✍️ Blog</a></li><li><a href="#">🔐 Login / Register</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul><li><a href="#">🔍 Find a Lawyer</a></li><li><a href="#">📋 Govt. Schemes</a></li><li><a href="#">🤔 Ask a Situation</a></li><li><a href="#">⚖️ Know Your Rights</a></li><li><a href="#">🆘 Emergency Aid</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal Topics</h5>
+      <ul><li><a href="#">🛒 Consumer Rights</a></li><li><a href="#">🏠 Property Law</a></li><li><a href="#">👨‍👩‍👧 Family Law</a></li><li><a href="#">⚖️ Criminal Law</a></li><li><a href="#">👷 Labour Rights</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Legal Aid India. All rights reserved. Not a substitute for professional legal advice.</p>
+    <div class="footer-legal-links"><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Disclaimer</a></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

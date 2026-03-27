@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Schemes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <button class="link" onclick="location.href='home.html'">← Back to Home</button>
+    <div class="logo">⚖️ Legal Aid India</div>
+  </nav>
+  <main class="page">
+    <h1>Government Services &amp; Schemes</h1>
+    <p>Click View Details to check scheme summary and apply.</p>
+    <div class="scheme-list" id="schemeList"></div>
+  </main>
+
+  <div class="modal hidden" id="detailModal">
+    <div class="modal-content">
+      <button id="closeModal" class="close">✕</button>
+      <h2 id="schemeTitle"></h2>
+      <p id="schemeBody"></p>
+      <a id="applyNow" class="btn-primary" target="_blank" rel="noopener">Apply Now</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
