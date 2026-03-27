@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ask a Situation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ASK PAGE -->
+ <div class="top-bar">
+  <div class="top-left">
+    <span class="back-btn" onclick="goBack()">← Back</span>
+    <div class="divider"></div>
+    <div class="logo-circle">⚖️</div>
+    <span class="title">Ask a Situation</span>
+  </div>
+</div>
+<div id="askPage" class="ask-content">
+
+  <div class="icon-wrapper">⚖️</div>
+
+  <h1>What’s your legal situation?</h1>
+
+  <p>
+    Describe your situation below and get instant AI-powered
+    legal guidance based on Indian law.
+  </p>
+
+  <!-- SUGGESTIONS -->
+  <div class="suggestions">
+
+    <button onclick="selectSuggestion('My landlord is refusing to return my security deposit')">
+      My landlord is refusing to return my security deposit
+    </button>
+
+    <button onclick="selectSuggestion('I was fired without notice. Is this legal?')">
+      I was fired without notice. Is this legal?
+    </button>
+
+    <button onclick="selectSuggestion('How do I file for divorce by mutual consent?')">
+      How do I file for divorce by mutual consent?
+    </button>
+
+    <div class="row">
+      <button onclick="selectSuggestion('Someone is harassing me on social media')">
+        Someone is harassing me on social media
+      </button>
+
+      <button onclick="selectSuggestion('Police are refusing to file my FIR')">
+        Police are refusing to file my FIR
+      </button>
+    </div>
+
+    <button onclick="selectSuggestion('How do I file an RTI application?')">
+      How do I file an RTI application?
+    </button>
+
+  </div>
+
+</div>
+
+<!-- INPUT -->
+<div class="ask-bottom">
+  <div class="input-container">
+    <input id="userInput" placeholder="Describe your situation..." />
+    <button onclick="sendSituation()"><span>➤</span></button>
+  </div>
+</div>
+
+<!-- CHAT PAGE -->
+<div id="chatPage" class="chat-page" style="display:none;">
+
+  <div id="chatBox" class="chat-box"></div>
+
+  <!-- CHAT INPUT -->
+  <div class="chat-bottom">
+    <div class="input-container">
+      <input id="chatInput" placeholder="Type your message..." />
+      <button onclick="sendSituation()"><span>➤</span></button>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
