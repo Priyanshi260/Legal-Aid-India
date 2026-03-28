@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Know Your Rights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #eef4f0;
+      --surface: #ffffff;
+      --border: #d6e4da;
+      --accent-blue: #3b6fd4;
+      --accent-teal: #2aab8c;
+      --accent-orange: #e07b39;
+      --accent-red: #d94f4f;
+      --accent-purple: #7c5cbf;
+      --accent-pink: #d44f8e;
+      --accent-yellow: #d4a017;
+      --accent-cyan: #1fa9c9;
+      --text-dark: #1a2e22;
+      --text-mid: #3d5447;
+      --text-light: #6b8474;
+      --shadow: 0 2px 16px rgba(30,60,40,0.08);
+      --shadow-hover: 0 8px 32px rgba(30,60,40,0.16);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #c8e6d0 0%, #dff0e8 40%, #e8f5ff 100%);
+      padding: 52px 24px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 20%, rgba(59,111,212,.10) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 60% at 20% 80%, rgba(42,171,140,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: .04em;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      line-height: 1.1;
+      animation: fadeDown .6s ease both;
+    }
+    .hero-sub {
+      margin: 16px auto 0;
+      max-width: 680px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 40px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      animation: fadeDown .6s .1s ease both;
+    }
+    .hero-sub strong { font-weight: 600; color: var(--text-dark); }
+
+    /* ── CONTROLS ── */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 24px 0;
+      animation: fadeDown .5s .2s ease both;
+      position: relative;
+      z-index: 100;
+    }
+    .search-wrap {
+      position: relative;
+      flex: 1 1 360px;
+      max-width: 560px;
+    }
+    .search-wrap svg {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      color: var(--text-light); pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      padding: 13px 20px 13px 46px;
+      border: 1.5px solid var(--border);
+      border-radius: 40px;
+      background: var(--surface);
+      font-family: inherit;
+      font-size: .95rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+    }
+    .search-input:focus { border-color: var(--accent-teal); box-shadow: 0 0 0 3px rgba(42,171,140,.15); }
+    .search-input::placeholder { color: var(--text-light); }
+
+    .dropdown-wrap { position: relative; }
+    .dropdown-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 13px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 40px;
+      background: var(--surface);
+      font-family: inherit;
+      font-size: .88rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s, border-color .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+      user-select: none;
+    }
+    .dropdown-btn:hover, .dropdown-btn.open { background: #f0f8f4; border-color: var(--accent-teal); }
+    .dropdown-btn svg { transition: transform .25s; }
+    .dropdown-btn.open svg { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-hover);
+      z-index: 9999;
+      overflow: hidden;
+      animation: fadeDown .2s ease both;
+    }
+    .dropdown-menu.show { display: block; }
+    .dropdown-menu li {
+      list-style: none;
+      padding: 11px 20px;
+      cursor: pointer;
+      font-size: .95rem;
+      color: var(--text-mid);
+      transition: background .15s, color .15s;
+    }
+    .dropdown-menu li:hover, .dropdown-menu li.active { background: #eaf5ef; color: var(--accent-teal); font-weight: 600; }
+
+    /* ── GRID ── */
+    .grid-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      animation: fadeUp .5s ease both;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--card-accent, var(--accent-teal));
+    }
+    .card-header {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .icon-box {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: var(--card-accent, var(--accent-teal));
+      display: grid; place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--card-accent, var(--accent-teal)) 35%, transparent);
+    }
+    .icon-box svg { color: #fff; }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text-dark);
+    }
+    .card-desc {
+      font-size: .88rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .learn-btn {
+      align-self: flex-start;
+      padding: 7px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      font-family: inherit;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .learn-btn:hover {
+      background: color-mix(in srgb, var(--card-accent, var(--accent-teal)) 10%, transparent);
+      border-color: var(--card-accent, var(--accent-teal));
+      color: var(--card-accent, var(--accent-teal));
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+      font-size: 1.05rem;
+    }
+
+    /* ── BOTTOM CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, #d8eee0 0%, #e4eeff 100%);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+    .cta-btns {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    }
+    .cta-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      border: none;
+      font-family: inherit;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .cta-btn-lawyer { background: var(--text-dark); color: #fff; }
+    .cta-btn-complaint { background: var(--surface); color: var(--text-dark); border: 1.5px solid var(--border); }
+
+    /* ── INFO PANELS ── */
+    .cta-chevron { transition: transform .3s; flex-shrink: 0; }
+    .cta-btn.active .cta-chevron { transform: rotate(180deg); }
+
+    .info-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .45s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+      opacity: 0;
+    }
+    .info-panel.open { max-height: 900px; opacity: 1; }
+
+    .info-panel-inner {
+      max-width: 860px;
+      margin: 20px auto 0;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+    .info-panel-header {
+      display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+    }
+    .info-panel-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: grid; place-items: center; flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+    .info-panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 4px;
+    }
+    .info-panel-sub { font-size: .88rem; color: var(--text-light); }
+
+    .lawyer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px; margin-bottom: 20px;
+    }
+    .lawyer-card {
+      background: #f5faf7;
+      border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      display: flex; flex-direction: column; gap: 6px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .lawyer-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .lawyer-icon { font-size: 1.5rem; }
+    .lawyer-card strong { font-size: .9rem; color: var(--text-dark); }
+    .lawyer-card p { font-size: .82rem; color: var(--text-light); line-height: 1.5; }
+
+    .complaint-options { display: flex; flex-direction: column; gap: 0; margin-bottom: 20px; }
+    .complaint-card {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: #f5faf7; border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 20px;
+    }
+    .complaint-card strong { display: block; font-size: .95rem; color: var(--text-dark); margin-bottom: 6px; }
+    .complaint-card p { font-size: .85rem; color: var(--text-light); line-height: 1.6; margin-bottom: 8px; }
+    .complaint-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      color: #fff; font-weight: 700; font-size: 1rem;
+      display: grid; place-items: center; flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    }
+    .complaint-divider {
+      text-align: center; padding: 10px 0;
+      font-size: .8rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-light); position: relative;
+    }
+    .complaint-divider::before, .complaint-divider::after {
+      content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: var(--border);
+    }
+    .complaint-divider::before { left: 0; }
+    .complaint-divider::after { right: 0; }
+
+    .info-panel-footer {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 18px; background: #eef6f2;
+      border-radius: 10px; font-size: .85rem; color: var(--text-mid);
+    }
+    .info-link { color: var(--accent-teal); font-weight: 600; text-decoration: none; margin-left: 2px; }
+    .info-link:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px 24px;
+      font-size: .8rem;
+      color: var(--text-light);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(20,40,28,.45);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn .2s ease both; }
+    .modal {
+      background: var(--surface);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 36px 36px 28px;
+      box-shadow: 0 20px 60px rgba(20,40,28,.25);
+      position: relative;
+      animation: scaleIn .25s ease both;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-light); font-size: 1.4rem; line-height: 1;
+    }
+    .modal-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      display: grid; place-items: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+    .modal-icon svg { color: #fff; }
+    .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+    .modal p { font-size: .95rem; color: var(--text-mid); line-height: 1.7; }
+    .modal-tag {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: #eaf5ef;
+      color: var(--accent-teal);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-16px) } to { opacity:1; transform:none } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px)  } to { opacity:1; transform:none } }
+    @keyframes fadeIn   { from { opacity:0 } to { opacity:1 } }
+    @keyframes scaleIn  { from { opacity:0; transform:scale(.94) } to { opacity:1; transform:none } }
+
+    /* stagger cards */
+    .card:nth-child(1) { animation-delay: .05s }
+    .card:nth-child(2) { animation-delay: .10s }
+    .card:nth-child(3) { animation-delay: .15s }
+    .card:nth-child(4) { animation-delay: .20s }
+    .card:nth-child(5) { animation-delay: .25s }
+    .card:nth-child(6) { animation-delay: .30s }
+    .card:nth-child(7) { animation-delay: .35s }
+    .card:nth-child(8) { animation-delay: .40s }
+
+    @media (max-width: 600px) {
+      .rights-grid { grid-template-columns: 1fr; }
+      .cta-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>Know Your Rights</h1>
+  <p class="hero-sub"><strong>Empowering You:</strong> Understanding Your Fundamental Rights and Freedoms</p>
+</header>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input class="search-input" id="searchInput" type="text"
+      placeholder="Search for a specific right (e.g., freedom of speech, workplace equality)..."/>
+  </div>
+
+  <div class="dropdown-wrap">
+    <button class="dropdown-btn" id="categoryBtn">
+      Filter by Category
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </button>
+    <ul class="dropdown-menu" id="categoryMenu">
+      <li data-value="all" class="active">All Categories</li>
+      <li data-value="civil">Civil Rights</li>
+      <li data-value="social">Social Rights</li>
+      <li data-value="political">Political Rights</li>
+      <li data-value="economic">Economic Rights</li>
+    </ul>
+  </div>
+
+  <div class="dropdown-wrap">
+    <button class="dropdown-btn" id="groupBtn">
+      Filter by Group
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </button>
+    <ul class="dropdown-menu" id="groupMenu">
+      <li data-value="all" class="active">All Groups</li>
+      <li data-value="women">Women</li>
+      <li data-value="children">Children</li>
+      <li data-value="senior">Senior Citizens</li>
+      <li data-value="lgbtq">LGBTQ+</li>
+      <li data-value="disability">Persons with Disabilities</li>
+    </ul>
+  </div>
+</div>
+
+<!-- GRID -->
+<section class="grid-section">
+  <div class="rights-grid" id="rightsGrid"></div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section">
+  <h2>What to do if your rights are violated?</h2>
+  <div class="cta-btns">
+    <button class="cta-btn cta-btn-lawyer" id="lawyerBtn">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+      1. Find a Lawyer
+      <svg class="cta-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <button class="cta-btn cta-btn-complaint" id="complaintBtn">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+      2. How to File a Complaint
+      <svg class="cta-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- LAWYER PANEL -->
+  <div class="info-panel" id="lawyerPanel">
+    <div class="info-panel-inner">
+      <div class="info-panel-header">
+        <div class="info-panel-icon" style="background:#2e7d32">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div>
+          <h3 class="info-panel-title">Find the Right Lawyer for Your Case</h3>
+          <p class="info-panel-sub">Different legal issues require different specialists. Here's a quick guide:</p>
+        </div>
+      </div>
+      <div class="lawyer-grid">
+        <div class="lawyer-card">
+          <span class="lawyer-icon">⚖️</span>
+          <strong>Civil Rights Lawyer</strong>
+          <p>Handles discrimination, equality, and freedom of expression cases.</p>
+        </div>
+        <div class="lawyer-card">
+          <span class="lawyer-icon">🏠</span>
+          <strong>Housing &amp; Property Lawyer</strong>
+          <p>Deals with evictions, tenant rights, and housing disputes.</p>
+        </div>
+        <div class="lawyer-card">
+          <span class="lawyer-icon">👩‍💼</span>
+          <strong>Employment Lawyer</strong>
+          <p>Covers workplace harassment, wrongful termination, and wage theft.</p>
+        </div>
+        <div class="lawyer-card">
+          <span class="lawyer-icon">👨‍👩‍👧</span>
+          <strong>Family &amp; Child Rights Lawyer</strong>
+          <p>Assists with child custody, domestic violence, and family law matters.</p>
+        </div>
+        <div class="lawyer-card">
+          <span class="lawyer-icon">♿</span>
+          <strong>Disability Rights Lawyer</strong>
+          <p>Advocates for accessibility rights and anti-discrimination protections.</p>
+        </div>
+        <div class="lawyer-card">
+          <span class="lawyer-icon">🌐</span>
+          <strong>Human Rights Lawyer</strong>
+          <p>Works on broad violations including political rights and freedom cases.</p>
+        </div>
+      </div>
+      <div class="info-panel-footer">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        For a full directory of verified lawyers by location and specialisation, visit our <a href="#" class="info-link">Legal Aid Dashboard →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLAINT PANEL -->
+  <div class="info-panel" id="complaintPanel">
+    <div class="info-panel-inner">
+      <div class="info-panel-header">
+        <div class="info-panel-icon" style="background:#3b6fd4">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <h3 class="info-panel-title">How to File a Complaint</h3>
+          <p class="info-panel-sub">You have two main options to report a rights violation:</p>
+        </div>
+      </div>
+      <div class="complaint-options">
+        <div class="complaint-card">
+          <div class="complaint-num" style="background:#3b6fd4">1</div>
+          <div>
+            <strong>File an Online Complaint</strong>
+            <p>Visit the official national or state human rights portal to submit your complaint digitally. You can upload supporting documents, track the status of your case, and receive updates via email or SMS — all without leaving your home.</p>
+          </div>
+        </div>
+        <div class="complaint-divider">or</div>
+        <div class="complaint-card">
+          <div class="complaint-num" style="background:#e07b39">2</div>
+          <div>
+            <strong>Visit Your Nearest Police Station</strong>
+            <p>For urgent matters or if you prefer in-person assistance, visit your local police station to file an FIR (First Information Report). You may also approach a magistrate's court directly if the police are unresponsive.</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-panel-footer">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Need help filling out the form? Visit our <a href="#" class="info-link">Complaint Guide Dashboard →</a> for step-by-step instructions.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  All information is for awareness and does not constitute legal advice. Source: [Country/Source Placeholder] Laws and Constitution
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-icon" id="modalIcon"></div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <span class="modal-tag" id="modalTag"></span>
+  </div>
+</div>
+
+<script>
+  const RIGHTS = [
+    {
+      id: 1,
+      title: "Right to Equality",
+      desc: "Ensures everyone is treated fairly and equally, without discrimination based on race, gender, or religion.",
+      longDesc: "The Right to Equality is a foundational human right that guarantees every individual equal treatment before the law. It prohibits discrimination on the grounds of race, religion, caste, sex, or place of birth, ensuring that all citizens enjoy equal opportunities in public life, employment, and access to services.",
+      accent: "#3b6fd4",
+      category: "civil",
+      groups: ["women", "lgbtq"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`
+    },
+    {
+      id: 2,
+      title: "Freedom of Speech & Expression",
+      desc: "Protects your right to hold and express your own opinions without fear of punishment.",
+      longDesc: "Freedom of Speech and Expression gives every individual the right to express their views, opinions, and ideas freely through speech, writing, art, or any other medium. This right is fundamental to democracy and enables citizens to participate meaningfully in public discourse, journalism, and civic life.",
+      accent: "#2aab8c",
+      category: "civil",
+      groups: ["all"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>`
+    },
+    {
+      id: 3,
+      title: "Right to Adequate Housing",
+      desc: "Ensures access to safe, secure, habitable, and affordable housing.",
+      longDesc: "The Right to Adequate Housing recognizes that every person deserves a place to live in safety and dignity. This includes access to housing that is affordable, structurally sound, connected to essential services, and located in a safe environment — free from forced eviction or discriminatory policies.",
+      accent: "#e07b39",
+      category: "social",
+      groups: ["senior", "disability"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+    },
+    {
+      id: 4,
+      title: "Right to Privacy",
+      desc: "Protects you from unlawful interference with your personal life, home, and correspondence.",
+      longDesc: "The Right to Privacy safeguards individuals from arbitrary interference in their personal affairs. This includes protection of personal data, confidential communications, home life, and digital privacy. It limits surveillance, data collection, and intrusion by both state and private actors.",
+      accent: "#d94f4f",
+      category: "civil",
+      groups: ["all"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+    },
+    {
+      id: 5,
+      title: "Right to Education",
+      desc: "Ensures every child has access to quality and compulsory primary education.",
+      longDesc: "The Right to Education guarantees that every child, regardless of background, has access to free and compulsory education at the primary level. It includes the right to quality education, safe learning environments, and non-discriminatory access to educational opportunities at all levels.",
+      accent: "#7c5cbf",
+      category: "social",
+      groups: ["children", "women"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`
+    },
+    {
+      id: 6,
+      title: "Rights of Women",
+      desc: "Includes protection against violence, equal opportunity in workplaces, and political participation.",
+      longDesc: "Women's Rights encompass a broad range of protections and entitlements including the right to be free from gender-based violence, equal pay and workplace rights, reproductive rights, the right to participate in political processes, and equal access to education and healthcare.",
+      accent: "#d44f8e",
+      category: "civil",
+      groups: ["women"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M12 13v9"/><path d="M9 19h6"/></svg>`
+    },
+    {
+      id: 7,
+      title: "Freedom of Religion",
+      desc: "Guarantees freedom to practice and manifest one's religion or belief, in public or private.",
+      longDesc: "Freedom of Religion protects every individual's right to choose, practice, and change their religion or belief without coercion. This includes the freedom to worship privately or publicly, to teach religion, and to observe religious customs — while respecting the rights of others.",
+      accent: "#d4a017",
+      category: "civil",
+      groups: ["all"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0v20M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>`
+    },
+    {
+      id: 8,
+      title: "Rights of Persons with Disabilities",
+      desc: "Ensures accessibility, non-discrimination, and full integration into society.",
+      longDesc: "Rights of Persons with Disabilities guarantee equal opportunities and full participation in all aspects of life. This includes accessible infrastructure, anti-discrimination protections in employment and education, the right to independent living, and access to assistive technologies and support services.",
+      accent: "#1fa9c9",
+      category: "social",
+      groups: ["disability"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M19 13c-1.5-1-3-2.5-3-5H8c0 2.5-1.5 4-3 5"/><path d="M12 10v4"/><path d="M9 21a3 3 0 0 0 6 0"/></svg>`
+    },
+    {
+      id: 9,
+      title: "Right to Vote",
+      desc: "Guarantees every citizen the right to vote and participate in free, fair elections.",
+      longDesc: "The Right to Vote is the cornerstone of democratic governance. It ensures that every eligible citizen can participate in elections without discrimination, intimidation, or suppression. This includes the right to stand for election, access polling stations, and have one's vote counted equally — forming the basis of a government that truly represents the people.",
+      accent: "#2e7d32",
+      category: "political",
+      groups: ["women", "senior"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`
+    },
+    {
+      id: 10,
+      title: "Right to Political Participation",
+      desc: "Enables citizens to take part in governance, join political parties, and run for public office.",
+      longDesc: "The Right to Political Participation goes beyond voting — it includes the freedom to join or form political parties, stand as a candidate, campaign for causes, petition the government, and engage in peaceful political activism. It ensures that governance is inclusive and that all voices, regardless of background, can influence policy and public affairs.",
+      accent: "#5c6bc0",
+      category: "political",
+      groups: ["women", "lgbtq", "disability"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M8 12h4"/></svg>`
+    },
+    {
+      id: 11,
+      title: "Right to Fair Trial",
+      desc: "Ensures every person receives a fair, public hearing before an independent tribunal.",
+      longDesc: "The Right to a Fair Trial guarantees that anyone facing criminal charges or civil disputes is entitled to a transparent, impartial judicial process. This includes the presumption of innocence, the right to legal representation, the right to be heard, protection against self-incrimination, and the right to appeal — ensuring justice is both done and seen to be done.",
+      accent: "#795548",
+      category: "political",
+      groups: ["all"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`
+    },
+    {
+      id: 12,
+      title: "Right to Work",
+      desc: "Guarantees every person the opportunity to earn a livelihood through freely chosen employment.",
+      longDesc: "The Right to Work ensures that every individual has access to employment opportunities free from discrimination. It includes the right to just and favourable working conditions, protection against arbitrary dismissal, and the freedom to choose one's profession. It forms the foundation of economic independence and dignified living.",
+      accent: "#f57c00",
+      category: "economic",
+      groups: ["women", "disability", "lgbtq"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>`
+    },
+    {
+      id: 13,
+      title: "Right to Fair Wages",
+      desc: "Protects workers' entitlement to equal and sufficient pay for their labour.",
+      longDesc: "The Right to Fair Wages ensures that all workers receive remuneration that is equitable, non-discriminatory, and sufficient to maintain a decent standard of living. This includes the right to equal pay for equal work regardless of gender, ethnicity, or background, minimum wage protections, timely payment, and transparency in wage practices.",
+      accent: "#00897b",
+      category: "economic",
+      groups: ["women", "disability"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+    },
+    {
+      id: 14,
+      title: "Right to Social Security",
+      desc: "Ensures access to benefits and protections during unemployment, illness, or old age.",
+      longDesc: "The Right to Social Security guarantees that individuals and families have access to financial support and social protection in times of need — including unemployment benefits, disability allowances, pensions for the elderly, maternity protections, and healthcare coverage. It acts as a safety net ensuring no one is left destitute due to circumstances beyond their control.",
+      accent: "#6a1b9a",
+      category: "economic",
+      groups: ["senior", "disability", "women", "children"],
+      icon: `<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`
+    },
+  ];
+
+  let activeCategory = "all";
+  let activeGroup = "all";
+  let searchQuery = "";
+
+  function renderCards() {
+    const grid = document.getElementById("rightsGrid");
+    const filtered = RIGHTS.filter(r => {
+      const matchCat = activeCategory === "all" || r.category === activeCategory;
+      const matchGroup = activeGroup === "all" || r.groups.includes(activeGroup) || r.groups.includes("all");
+      const matchSearch = !searchQuery ||
+        r.title.toLowerCase().includes(searchQuery) ||
+        r.desc.toLowerCase().includes(searchQuery);
+      return matchCat && matchGroup && matchSearch;
+    });
+
+    grid.innerHTML = "";
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="no-results">No rights found matching your search. Try different keywords.</div>`;
+      return;
+    }
+    filtered.forEach((r, i) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.cssText = `--card-accent:${r.accent}; animation-delay:${i * 0.05}s`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="icon-box" style="background:${r.accent}">${r.icon}</div>
+          <div class="card-title">${r.title}</div>
+        </div>
+        <p class="card-desc">${r.desc}</p>
+        <button class="learn-btn" data-id="${r.id}">Learn More</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll(".learn-btn").forEach(btn => {
+      btn.addEventListener("click", () => openModal(+btn.dataset.id));
+    });
+  }
+
+  function openModal(id) {
+    const r = RIGHTS.find(x => x.id === id);
+    if (!r) return;
+    document.getElementById("modalIcon").style.background = r.accent;
+    document.getElementById("modalIcon").innerHTML = r.icon;
+    document.getElementById("modalTitle").textContent = r.title;
+    document.getElementById("modalDesc").textContent = r.longDesc;
+    document.getElementById("modalTag").textContent = r.category.charAt(0).toUpperCase() + r.category.slice(1) + " Right";
+    document.getElementById("modalTag").style.cssText = `background:color-mix(in srgb,${r.accent} 12%,transparent);color:${r.accent}`;
+    document.getElementById("modalOverlay").classList.add("show");
+  }
+
+  document.getElementById("modalClose").addEventListener("click", () =>
+    document.getElementById("modalOverlay").classList.remove("show"));
+  document.getElementById("modalOverlay").addEventListener("click", e => {
+    if (e.target === e.currentTarget) e.currentTarget.classList.remove("show");
+  });
+
+  // Dropdowns
+  function setupDropdown(btnId, menuId, onSelect) {
+    const btn = document.getElementById(btnId);
+    const menu = document.getElementById(menuId);
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      btn.classList.toggle("open");
+      menu.classList.toggle("show");
+    });
+    menu.querySelectorAll("li").forEach(li => {
+      li.addEventListener("click", () => {
+        menu.querySelectorAll("li").forEach(x => x.classList.remove("active"));
+        li.classList.add("active");
+        onSelect(li.dataset.value, li.textContent);
+        btn.classList.remove("open");
+        menu.classList.remove("show");
+      });
+    });
+  }
+
+  setupDropdown("categoryBtn", "categoryMenu", (val, label) => {
+    activeCategory = val;
+    document.getElementById("categoryBtn").childNodes[0].textContent = val === "all" ? "Filter by Category " : label + " ";
+    renderCards();
+  });
+
+  setupDropdown("groupBtn", "groupMenu", (val, label) => {
+    activeGroup = val;
+    document.getElementById("groupBtn").childNodes[0].textContent = val === "all" ? "Filter by Group " : label + " ";
+    renderCards();
+  });
+
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".dropdown-btn").forEach(b => b.classList.remove("open"));
+    document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("show"));
+  });
+
+  document.getElementById("searchInput").addEventListener("input", e => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderCards();
+  });
+
+  renderCards();
+
+  // Panel toggles
+  function setupPanel(btnId, panelId, otherBtnId, otherPanelId) {
+    const btn = document.getElementById(btnId);
+    const panel = document.getElementById(panelId);
+    const otherBtn = document.getElementById(otherBtnId);
+    const otherPanel = document.getElementById(otherPanelId);
+
+    btn.addEventListener("click", () => {
+      const isOpen = panel.classList.contains("open");
+      // Close both first
+      panel.classList.remove("open");
+      otherPanel.classList.remove("open");
+      btn.classList.remove("active");
+      otherBtn.classList.remove("active");
+      // Toggle clicked one
+      if (!isOpen) {
+        panel.classList.add("open");
+        btn.classList.add("active");
+        setTimeout(() => panel.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+      }
+    });
+  }
+
+  setupPanel("lawyerBtn", "lawyerPanel", "complaintBtn", "complaintPanel");
+  setupPanel("complaintBtn", "complaintPanel", "lawyerBtn", "lawyerPanel");
+</script>
+</body>
+</html>
