@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f7f9fa;
+    color: #333;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header with Green-Navy Gradient */
+.header {
+    background: linear-gradient(135deg, #0d2c47 0%, #17714b 100%);
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.header-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    font-size: 0.9rem;
+}
+
+.header-title {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.header-button {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.main-content {
+    padding: 50px 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #555;
+    font-size: 1.5rem;
+}
+
+.divider-line {
+    width: 60px;
+    height: 3px;
+    background-color: #ff9800;
+    margin: 10px auto 40px;
+}
+
+/* 3-Column Grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Shorter Card Layout */
+.card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 280px; /* Shortened Height */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.card-link {
+    color: #1a6039;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Modal / Popup */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-info-box {
+    background-color: #e6f7ff;
+    border-left: 4px solid #1a73e8;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.related-law-tag {
+    display: inline-block;
+    background: #f1f3f4;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin: 5px 5px 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+@media (max-width: 900px) { .grid-container { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .grid-container { grid-template-columns: 1fr; } }

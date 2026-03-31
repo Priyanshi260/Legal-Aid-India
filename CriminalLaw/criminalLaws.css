@@ -1,0 +1,296 @@
+/* --- Global Resets and Modern Baseline --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', 'Segoe UI', Roboto, sans-serif; /* Clean Sans-Serif stack */
+    background-color: #f7f9fa; /* Light grey background for the body */
+    color: #333;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px; /* Limits the width of the main content column */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header Section (Gradient Background) --- */
+.header {
+    background: linear-gradient(135deg, #0d2c47 0%, #17714b 100%); /* Deep Navy-Teal to Green Gradient */
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.header-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.header-subtitle {
+    font-size: 1.1rem;
+    max-width: 650px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.header-button {
+    background-color: #ff9800; /* Orange/Gold button from reference */
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px; /* Pill-shaped */
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* --- Main Content Section (Grey Area) --- */
+.main-content {
+    padding: 50px 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #555;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.divider-line {
+    width: 60px;
+    height: 3px;
+    background-color: #ff9800;
+    margin: 0 auto 40px;
+}
+
+/* --- THE GRID LAYOUT (FORCES 3 COLUMNS) --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 25px; /* Spacing between cards */
+}
+
+/* --- --- THE MODIFIED COMPACT PLAYCARDS (SHORTENED) --- --- */
+.card {
+    background-color: #fff;
+    padding: 25px; /* Reduced padding for a tighter fit */
+    border-radius: 12px;
+    /* UPDATE: Simplified border to match the visual style */
+    border: 1px solid #e0e0e0; /* Subtle light grey border */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Faint grey shadow from reference */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes the 'Read Article' link to the bottom */
+    cursor: pointer; /* Makes the entire card clickable */
+    
+    /* THE MODIFICATION IS HERE: */
+    /* Remove the aspect-ratio and define a specific, short height. */
+    /* aspect-ratio: 1 / 1; <- Removed the square constraint */
+    height: 280px; /* NEW: Forces the card to be compact and uniform. */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Gentle lift on hover */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Deepen shadow on hover */
+}
+
+.card-title {
+    font-size: 1.3rem;
+    color: #000;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows description to fill available space */
+}
+
+.card-link {
+    color: #1a6039; /* Dark green link text from reference */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+/* --- THE MODAL (POPUP) STYLES --- */
+/* The background overlay - hidden by default */
+.modal-overlay {
+    display: none; /* Crucial for hiding it */
+    position: fixed; /* Stays in place on scroll */
+    z-index: 1000; /* Sits on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    justify-content: center;
+    align-items: center; /* Center horizontally and vertically */
+    padding: 20px;
+}
+
+/* The active state to show the modal */
+.modal-overlay.active {
+    display: flex;
+}
+
+/* The popup box content */
+.modal-content {
+    background-color: #fff;
+    width: 100%;
+    max-width: 650px; /* Limits the width of the popup */
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    max-height: 90vh; /* Prevents overflow on short screens */
+    overflow-y: auto; /* Adds a scrollbar if the text is too long */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Close button style */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* --- Styles for Modal Body Content --- */
+/* These are applied to the dynamically inserted HTML */
+.modal-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.modal-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Light blue section (e.g., Key Points, Rights) */
+.modal-info-box {
+    background-color: #e6f7ff; /* Faint light blue background from reference image */
+    border-left: 4px solid #1a73e8; /* Blue accent line */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.info-box-header {
+    font-weight: 700;
+    color: #1a73e8; /* Blue text */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.info-box-list {
+    list-style-type: none; /* Use custom icons if needed */
+}
+
+.info-box-list li {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 15px;
+}
+
+/* Faint bullet placeholder */
+.info-box-list li::before {
+    content: "\2022"; /* Simple bullet point */
+    color: #1a73e8; /* Blue color */
+    position: absolute;
+    left: 0;
+}
+
+/* Related Laws section */
+.modal-related-header {
+    font-weight: 700;
+    color: #555;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.modal-laws-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows laws to wrap to the next line */
+    gap: 10px; /* Spacing between law buttons */
+}
+
+/* Small, grey rounded button/link style */
+.related-law-tag {
+    background-color: #f1f3f4; /* Grey background */
+    color: #555;
+    padding: 8px 15px;
+    border-radius: 20px; /* Full pill-shaped */
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- Responsiveness: Stack columns on smaller screens --- */
+@media (max-width: 950px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 650px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* 1 column on phones */
+    }
+    .header-title {
+        font-size: 2.2rem;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    .card {
+        height: auto; /* Allow height to flex on phones if description is too long */
+    }
+}
