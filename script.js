@@ -99,6 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'Property Law/pl.html';
         } else if (topicName === 'Family Law') {
             window.location.href = 'Family Law/fl.html';
+        } else if (topicName === 'Criminal Law') {
+            window.location.href = 'CriminalLaw/criminalLaw.html';
+        } else if (topicName === 'Labour Rights') {
+            window.location.href = 'labourRights/labourRights.html';
+        } else if (topicName === 'RTI') {
+            window.location.href = 'Rti.html';
         } else {
             showToast('This topic page is coming soon.');
         }
