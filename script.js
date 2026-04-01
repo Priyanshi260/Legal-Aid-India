@@ -91,7 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('searchQuery').value = topicName;
         window.handleSearch();
     };
-
+    
+    window.browseTopic = (topicName) => {
+        if (topicName === 'Consumer Rights') {
+            window.location.href = 'Customer Rights/cr.html';
+        } else if (topicName === 'Property Law') {
+            window.location.href = 'Property Law/pl.html';
+        } else if (topicName === 'Family Law') {
+            window.location.href = 'Family Law/fl.html';
+        } else if (topicName === 'Criminal Law') {
+            window.location.href = 'CriminalLaw/criminalLaw.html';
+        } else if (topicName === 'Labour Rights') {
+            window.location.href = 'labourRights/labourRights.html';
+        } else if (topicName === 'RTI') {
+            window.location.href = 'Rti.html';
+        } else {
+            showToast('This topic page is coming soon.');
+        }
+    };
+    
     window.showToast = (message) => {
         const oldToast = document.querySelector('.toast');
         if (oldToast) oldToast.remove();

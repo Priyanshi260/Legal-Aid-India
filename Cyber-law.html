@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Law — Legal Topics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal-dark: #0d3b38; --teal-mid: #1a5c54; --teal-light: #2a7a6e;
+      --accent: #c9813a; --text-dark: #1a2533; --text-mid: #3d5166;
+      --text-light: #6b7f93; --border: #dde4ec; --bg: #f5f7fa; --white: #ffffff;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text-dark); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 18px 32px; font-size: 14px; color: rgba(255,255,255,0.85);
+      text-decoration: none; position: relative; z-index: 2;
+    }
+    .back-link:hover { color: #fff; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal-mid) 55%, var(--teal-light) 100%);
+      padding: 0 32px 48px; position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; right: -80px; bottom: -80px;
+      width: 340px; height: 340px; background: rgba(255,255,255,0.04); border-radius: 50%;
+    }
+    .hero-inner { max-width: 900px; display: flex; align-items: center; gap: 28px; }
+    .hero-icon {
+      width: 88px; height: 88px; background: rgba(255,255,255,0.1);
+      border-radius: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hero-icon svg { width: 48px; height: 48px; }
+    .hero-text h1 { font-family: 'Merriweather', serif; font-size: 36px; color: #fff; line-height: 1.2; margin-bottom: 10px; }
+    .hero-text p { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 560px; }
+    .badge {
+      display: inline-block; margin-top: 16px; background: var(--accent);
+      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 6px 16px; border-radius: 20px;
+    }
+
+    .main { max-width: 1200px; margin: 0 auto; padding: 48px 32px 80px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--text-light);
+      text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--border);
+    }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      padding: 28px 26px 24px; display: flex; flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); border-color: #c2cdd9; }
+    .card-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+    .card h2 { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 700; color: var(--teal-dark); line-height: 1.4; margin-bottom: 12px; }
+    .card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; flex: 1; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 18px;
+      font-size: 14px; font-weight: 600; color: var(--teal-mid);
+      background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
+    }
+    .card-link:hover { color: var(--teal-dark); }
+    .card-link svg { width: 14px; height: 14px; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,30,28,0.6); backdrop-filter: blur(5px);
+      z-index: 100; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 14px; max-width: 680px; width: 100%;
+      max-height: 88vh; overflow-y: auto; position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal-mid));
+      padding: 28px 32px 24px; border-radius: 14px 14px 0 0; position: relative;
+    }
+    .modal-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+    .modal-title { font-family: 'Merriweather', serif; font-size: 22px; color: #fff; line-height: 1.3; padding-right: 36px; }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.15); border: none; border-radius: 50%;
+      width: 34px; height: 34px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #fff; transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.3); }
+    .modal-close svg { width: 16px; height: 16px; }
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-section { margin-bottom: 22px; }
+    .modal-section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .modal-section p { font-size: 15px; color: var(--text-mid); line-height: 1.75; }
+    .key-points { list-style: none; }
+    .key-points li {
+      font-size: 14.5px; color: var(--text-mid); line-height: 1.6;
+      padding: 8px 0 8px 22px; border-bottom: 1px solid var(--border); position: relative;
+    }
+    .key-points li:last-child { border-bottom: none; }
+    .key-points li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .law-tag {
+      display: inline-block; background: #eaf3f1; color: var(--teal-mid);
+      font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+      margin: 4px 4px 4px 0; border: 1px solid #c5deda;
+    }
+
+    @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) {
+      .cards { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 26px; }
+      .hero-icon { width: 64px; height: 64px; }
+      .modal-body, .modal-header { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <a href="#" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Home
+  </a>
+  <div class="hero-inner">
+    <div class="hero-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 6L10 16v16c0 13 9.6 24.8 22 27 12.4-2.2 22-14 22-27V16L32 6z" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" fill="rgba(255,255,255,0.08)"/>
+        <rect x="24" y="29" width="16" height="13" rx="2" stroke="white" stroke-width="2.2" fill="none"/>
+        <path d="M27 29v-4a5 5 0 0 1 10 0v4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="32" cy="35.5" r="1.8" fill="white"/>
+        <line x1="32" y1="37.3" x2="32" y2="39.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>Cyber Law</h1>
+      <p>Understand your rights and protections in the digital world under Indian law. Learn about cybercrime, data privacy, online fraud, digital signatures, and how to seek legal remedies.</p>
+      <span class="badge">90 SECTIONS</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="section-label">Articles &amp; Guides</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">Article 01</div>
+      <h2>Information Technology Act, 2000 — Overview</h2>
+      <p>The IT Act is India's primary legislation governing cyberspace — covering electronic commerce, digital signatures, cybercrimes, and electronic records.</p>
+      <button class="card-link" onclick="openModal(0)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 02</div>
+      <h2>How to File a Cybercrime Complaint</h2>
+      <p>Step-by-step guide to reporting cybercrime in India — via the National Cyber Crime Reporting Portal, local police cyber cells, or a Magistrate's court.</p>
+      <button class="card-link" onclick="openModal(1)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 03</div>
+      <h2>Online Fraud &amp; Identity Theft</h2>
+      <p>How Indian law treats online fraud, phishing, UPI scams, and identity theft. Covers Sections 66C and 66D of the IT Act and available legal remedies.</p>
+      <button class="card-link" onclick="openModal(2)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 04</div>
+      <h2>Data Privacy &amp; Personal Data Protection</h2>
+      <p>An introduction to the Digital Personal Data Protection Act, 2023 — how it regulates collection and processing of personal data and what rights individuals hold.</p>
+      <button class="card-link" onclick="openModal(3)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 05</div>
+      <h2>Cyber Defamation &amp; Online Harassment</h2>
+      <p>Legal protections against trolling, doxxing, cyberstalking, and defamation online. Covers IPC provisions and the IT Act sections still enforceable today.</p>
+      <button class="card-link" onclick="openModal(4)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 06</div>
+      <h2>Digital Signatures &amp; Electronic Contracts</h2>
+      <p>How the IT Act gives legal validity to digital signatures and e-contracts in India — certifying authorities, validity requirements, and enforceability of online agreements.</p>
+      <button class="card-link" onclick="openModal(5)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 07</div>
+      <h2>Hacking &amp; Unauthorised Access</h2>
+      <p>What constitutes hacking under Indian law, civil and criminal penalties, and how victims can seek compensation through the Adjudicating Officer mechanism.</p>
+      <button class="card-link" onclick="openModal(6)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 08</div>
+      <h2>Social Media &amp; Intermediary Liability</h2>
+      <p>IT (Intermediary Guidelines &amp; Digital Media Ethics Code) Rules, 2021 — what obligations platforms have and how users can raise grievances against them.</p>
+      <button class="card-link" onclick="openModal(7)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="card">
+      <div class="card-num">Article 09</div>
+      <h2>Child Safety Online &amp; POCSO in Cyberspace</h2>
+      <p>How Indian law — including POCSO, IT Act Section 67B, and the BNS — protects children from online exploitation, child pornography, and grooming.</p>
+      <button class="card-link" onclick="openModal(8)">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnBackdrop(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-num" id="mNum"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p id="mOverview"></p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Points</div>
+        <ul class="key-points" id="mPoints"></ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Relevant Laws &amp; Sections</div>
+        <div id="mTags"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const articles = [
+  {
+    num: "Article 01",
+    title: "Information Technology Act, 2000 — Overview",
+    overview: "The Information Technology Act, 2000 (IT Act) is India's primary law governing activities in cyberspace. Enacted to give legal recognition to electronic transactions and combat cybercrime, it was significantly amended in 2008 to address emerging threats. It applies to any offence committed using a computer resource anywhere in the world, as long as it involves a computer system or network located in India.",
+    points: [
+      "Grants legal recognition to electronic records and digital signatures.",
+      "Defines offences like hacking, data theft, publishing obscene content, and cyber terrorism.",
+      "Establishes the Cyber Appellate Tribunal and Adjudicating Officers for civil disputes.",
+      "The 2008 amendment introduced Sections 66A–66F covering a wide range of cyber offences.",
+      "Section 66A was struck down by the Supreme Court in 2015 (Shreya Singhal case) as unconstitutional.",
+      "The Act empowers the government to block online content under Section 69A."
+    ],
+    tags: ["IT Act, 2000", "IT (Amendment) Act, 2008", "Section 43", "Section 66", "Section 69A"]
+  },
+  {
+    num: "Article 02",
+    title: "How to File a Cybercrime Complaint",
+    overview: "Victims of cybercrime in India have multiple channels to report offences. The government has set up a dedicated portal and helpline to make reporting accessible. It is important to preserve evidence — screenshots, emails, transaction IDs — before filing a complaint. Complaints can be filed online, at a cyber cell, or at any local police station.",
+    points: [
+      "Visit cybercrime.gov.in or call helpline 1930 for financial cyber fraud.",
+      "Report: online financial fraud, cyberbullying, social media crimes, hacking, and more.",
+      "Preserve screenshots, URLs, email headers, and transaction IDs as evidence.",
+      "File an FIR at the nearest police station — they are legally bound to accept cybercrime complaints.",
+      "Cyber Cells exist in most district police headquarters with trained officers.",
+      "For child-related online crimes, report on the same portal under 'Report & Track' with anonymity."
+    ],
+    tags: ["IT Act, 2000", "Section 154 CrPC", "Section 66C", "Section 66D", "cybercrime.gov.in"]
+  },
+  {
+    num: "Article 03",
+    title: "Online Fraud & Identity Theft",
+    overview: "Online fraud encompasses UPI scams, phishing emails, fake e-commerce websites, OTP fraud, and SIM swapping. Identity theft occurs when someone uses another person's personal information without consent to commit fraud. These offences are punishable under the IT Act as well as the Bharatiya Nyaya Sanhita (BNS), 2023.",
+    points: [
+      "Section 66C (IT Act): Punishes identity theft — up to 3 years imprisonment and ₹1 lakh fine.",
+      "Section 66D (IT Act): Punishes cheating by impersonation using a computer resource.",
+      "UPI/banking fraud should also be reported to your bank and RBI's Banking Ombudsman.",
+      "Never share OTPs, CVVs, or PINs — banks and UPI apps never ask for these.",
+      "File a complaint within 24 hours of financial fraud to maximise chances of fund recovery.",
+      "Victim compensation can be sought through the Adjudicating Officer under Section 43."
+    ],
+    tags: ["Section 66C IT Act", "Section 66D IT Act", "BNS 2023", "RBI Ombudsman"]
+  },
+  {
+    num: "Article 04",
+    title: "Data Privacy & Personal Data Protection",
+    overview: "India enacted the Digital Personal Data Protection Act (DPDPA), 2023 — a landmark law governing how personal data of Indian citizens is collected, stored, processed, and transferred. It applies to both Indian companies and foreign entities processing data of people in India, creating obligations for 'Data Fiduciaries' and rights for 'Data Principals' (individuals).",
+    points: [
+      "You have the right to know what personal data is collected about you and why.",
+      "You can withdraw consent for data processing at any time.",
+      "You have the right to correction and erasure of your personal data.",
+      "Organisations must report data breaches to the Data Protection Board of India.",
+      "Penalties for breach can go up to ₹250 crore for significant data breaches.",
+      "Children's data has enhanced protections — parental consent is mandatory under the Act."
+    ],
+    tags: ["DPDPA 2023", "Data Protection Board", "IT Act Section 43A", "IT (Reasonable Security Practices) Rules"]
+  },
+  {
+    num: "Article 05",
+    title: "Cyber Defamation & Online Harassment",
+    overview: "Cyber defamation involves publishing false statements about someone online that damage their reputation. Online harassment includes cyberstalking, doxxing, morphing images, trolling, and sending threatening messages. These are cognisable offences under Indian law and victims can seek both criminal punishment and civil damages.",
+    points: [
+      "Section 67 (IT Act): Punishes publishing obscene material online — up to 5 years and ₹10 lakh fine.",
+      "Section 354D (IPC/BNS): Criminalises cyberstalking — following a woman online repeatedly.",
+      "Defamation online is covered under BNS Section 356 (equivalent of IPC Section 499/500).",
+      "Morphing someone's photo is punishable under Section 66E (violation of privacy).",
+      "You can seek an injunction from a civil court to remove defamatory content.",
+      "Report to the platform first — IT Rules mandate a Grievance Officer for all major platforms."
+    ],
+    tags: ["Section 67 IT Act", "Section 66E IT Act", "Section 354D IPC/BNS", "Section 499 IPC"]
+  },
+  {
+    num: "Article 06",
+    title: "Digital Signatures & Electronic Contracts",
+    overview: "The IT Act, 2000 gives full legal validity to digital signatures and contracts entered into electronically. An electronic contract is as enforceable as a paper contract, provided the essential elements of a valid contract (offer, acceptance, consideration, capacity) are met. Digital signatures authenticate the identity of the signatory and ensure document integrity.",
+    points: [
+      "Electronic contracts are valid under Section 10A of the IT Act.",
+      "Digital signatures issued by a licensed Certifying Authority (CA) are legally recognised.",
+      "Aadhaar-based eSign is a widely used form of electronic signature in India.",
+      "Click-wrap and browse-wrap agreements (e.g., 'I Agree' on apps) are legally binding.",
+      "A digital signature cannot be repudiated — the signatory cannot deny signing.",
+      "Disputes about electronic contracts are adjudicated under the IT Act and Indian Contract Act."
+    ],
+    tags: ["Section 10A IT Act", "Section 3 IT Act", "Indian Contract Act 1872", "IT (Certifying Authorities) Rules"]
+  },
+  {
+    num: "Article 07",
+    title: "Hacking & Unauthorised Access",
+    overview: "Hacking — accessing a computer, network, or data without authorisation — is one of the most common cybercrimes in India. The IT Act treats it as both a civil wrong (attracting compensation) and a criminal offence (attracting imprisonment). Even attempting to hack or introducing viruses or malware is a punishable act.",
+    points: [
+      "Section 43 (IT Act): Civil liability — if someone damages your computer, you can claim compensation.",
+      "Section 66 (IT Act): Hacking is a criminal offence — up to 3 years imprisonment and ₹5 lakh fine.",
+      "Introducing viruses, worms, or ransomware is an offence under Section 43(c).",
+      "Denial-of-service (DoS) attacks are covered under Section 43(f).",
+      "Cyber terrorism (attacking critical infrastructure) under Section 66F carries life imprisonment.",
+      "Victims can approach an Adjudicating Officer for compensation up to ₹5 crore."
+    ],
+    tags: ["Section 43 IT Act", "Section 66 IT Act", "Section 66F IT Act", "Adjudicating Officer"]
+  },
+  {
+    num: "Article 08",
+    title: "Social Media & Intermediary Liability",
+    overview: "The IT (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021 impose significant obligations on social media platforms, OTT platforms, and digital news portals in India. 'Significant Social Media Intermediaries' (SSMIs) — platforms with over 50 lakh users — have additional requirements including appointing resident grievance officers.",
+    points: [
+      "Every major platform must have a Grievance Officer based in India — contact them first.",
+      "Platforms must acknowledge complaints within 24 hours and resolve within 15 days.",
+      "SSMIs must remove non-consensual intimate images within 24 hours of complaint.",
+      "OTT platforms must follow a self-classification and content rating system.",
+      "Platforms that fail to comply lose their 'safe harbour' protection under Section 79.",
+      "A three-tier grievance redressal mechanism: platform → Appellate Committee → courts."
+    ],
+    tags: ["IT Rules 2021", "Section 79 IT Act", "SSMI", "Grievance Appellate Committee"]
+  },
+  {
+    num: "Article 09",
+    title: "Child Safety Online & POCSO in Cyberspace",
+    overview: "Children are especially vulnerable online — to grooming, sexual exploitation, cyberbullying, and harmful content. Indian law provides strong protections through a combination of the POCSO Act, 2012, the IT Act, and the Bharatiya Nyaya Sanhita (BNS). Reporting such content is mandatory for intermediaries and any person who comes across it.",
+    points: [
+      "Section 67B (IT Act): Publishing child pornography — up to 7 years imprisonment for repeat offence.",
+      "POCSO Act, 2012: Covers sexual offences against children, including online grooming.",
+      "Section 15 POCSO: Storing child sexual abuse material (CSAM) is itself a punishable offence.",
+      "Intermediaries must report CSAM to cybercrime authorities immediately upon detection.",
+      "The DPDPA 2023 requires verifiable parental consent before processing any child's data.",
+      "Report CSAM anonymously at cybercrime.gov.in — your identity is fully protected."
+    ],
+    tags: ["Section 67B IT Act", "POCSO Act 2012", "Section 15 POCSO", "BNS 2023", "DPDPA 2023"]
+  }
+];
+
+function openModal(i) {
+  const a = articles[i];
+  document.getElementById('mNum').textContent = a.num;
+  document.getElementById('mTitle').textContent = a.title;
+  document.getElementById('mOverview').textContent = a.overview;
+  document.getElementById('mPoints').innerHTML = a.points.map(p => `<li>${p}</li>`).join('');
+  document.getElementById('mTags').innerHTML = a.tags.map(t => `<span class="law-tag">${t}</span>`).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOnBackdrop(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
