@@ -105,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'labourRights/labourRights.html';
         } else if (topicName === 'RTI') {
             window.location.href = 'Rti.html';
+        } else if (topicName === 'Taxation Law') {
+            window.location.href = 'taxation-laws.html';
+        } else if (topicName === 'Environmental Law') {
+            window.location.href = 'Environmental-Law.html';
         } else {
             showToast('This topic page is coming soon.');
         }

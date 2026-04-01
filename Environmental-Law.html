@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Environmental Laws – Legal Aid India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --green-dark: #0d3b1e; --green-mid: #1a5c35; --green-light: #2a8a52; --gold: #c9973a; --bg: #f4f6f5; --card-bg: #ffffff; --text-dark: #1a2b1e; --text-mid: #3d5a45; --text-muted: #6b8c72; --accent: #b5452a; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-dark); min-height: 100vh; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; padding: 14px 28px; font-size: 0.85rem; color: rgba(255,255,255,0.8); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+    .back-link:hover { color: #fff; }
+    .hero { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 55%, var(--green-light) 100%); position: relative; overflow: hidden; padding: 0 0 56px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(42,138,82,0.35) 0%, transparent 65%); }
+    .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding: 10px 32px 0; display: flex; align-items: center; gap: 32px; }
+    .hero-icon { font-size: 4.5rem; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); animation: float 3.5s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.15; }
+    .hero-text p { color: rgba(255,255,255,0.82); font-size: 1rem; line-height: 1.65; max-width: 520px; margin-bottom: 22px; }
+    .articles-badge { display: inline-block; background: var(--gold); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border-radius: 4px; }
+    .main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+    .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid #dde4e0; padding-bottom: 10px; margin-bottom: 32px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .card { background: var(--card-bg); border: 1px solid #e2eae4; border-radius: 10px; padding: 28px 26px 24px; cursor: pointer; transition: box-shadow 0.25s, transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+    .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .card:hover { box-shadow: 0 8px 28px rgba(13,59,30,0.13); transform: translateY(-3px); border-color: var(--green-light); }
+    .card:hover::after { transform: scaleX(1); }
+    .card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; line-height: 1.35; }
+    .card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 18px; }
+    .read-link { font-size: 0.85rem; font-weight: 600; color: var(--green-mid); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s, color 0.2s; }
+    .read-link:hover { color: var(--green-dark); gap: 8px; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,30,15,0.55); backdrop-filter: blur(3px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 14px; max-width: 620px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 36px 36px 40px; position: relative; box-shadow: 0 24px 64px rgba(0,0,0,0.2); animation: slideUp 0.25s ease; }
+    @keyframes slideUp { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
+    .modal-close { position: absolute; top: 18px; right: 20px; background: #eef2ee; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background 0.2s; }
+    .modal-close:hover { background: #d5e0d8; }
+    .modal-category { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-light); margin-bottom: 10px; }
+    .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--green-dark); margin-bottom: 20px; line-height: 1.3; }
+    .modal-body p { font-size: 0.93rem; color: var(--text-mid); line-height: 1.72; margin-bottom: 14px; }
+    .key-points { background: #f0f8f2; border-left: 4px solid var(--green-light); border-radius: 8px; padding: 20px 22px; margin: 24px 0; }
+    .key-points-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .key-points ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .key-points ul li { font-size: 0.88rem; color: var(--text-dark); padding-left: 18px; position: relative; line-height: 1.5; }
+    .key-points ul li::before { content: '•'; color: var(--green-light); position: absolute; left: 0; }
+    .related-section { margin-top: 24px; }
+    .related-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: #eef2ee; border: 1px solid #d4e0d8; color: var(--text-mid); font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; }
+    @media (max-width: 600px) { .hero-inner { flex-direction: column; gap: 16px; text-align: center; } .hero-text h1 { font-size: 2rem; } .modal { padding: 28px 20px 32px; } }
+  </style>
+</head>
+<body>
+<section class="hero">
+  <a href="index.html" class="back-link">← Back to Home</a>
+  <div class="hero-inner">
+    <div class="hero-icon">🌿</div>
+    <div class="hero-text">
+      <h1>Environmental Laws</h1>
+      <p>Know your rights and duties under India's environmental laws. Learn about pollution control, wildlife protection, forest conservation, and how to report violations.</p>
+      <span class="articles-badge">9 Articles</span>
+    </div>
+  </div>
+</section>
+<main class="main">
+  <div class="section-label">Articles &amp; Guides</div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</main>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-category" id="modalCategory"></div>
+    <h2 id="modalTitle"></h2>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<script>
+  const articles = [
+    { title: "Environment Protection Act, 1986 — Overview", excerpt: "The umbrella legislation empowering the Central Government to protect and improve India's environment after the Bhopal Gas Tragedy.", body: ["The Environment (Protection) Act, 1986 was enacted in the wake of the Bhopal Gas Tragedy. It is the umbrella legislation under which several specific environmental rules have been framed.", "It empowers the Central Government to set standards for emissions and discharge of pollutants, regulate industries, and take action against violators.", "Under this Act, the government can close, prohibit, or regulate any industry causing environmental damage."], keyPoints: ["Central Government can set emission & discharge standards", "Applies to air, water, land, and all forms of pollution", "Violation can attract imprisonment up to 5 years & fine up to ₹1 lakh", "Citizens can file complaints with the government", "Penalty increases for continuing violations"], related: ["Environment (Protection) Act, 1986", "Environment (Protection) Rules, 1986", "National Green Tribunal Act, 2010"] },
+    { title: "How to File a Complaint at the National Green Tribunal", excerpt: "Step-by-step guide to approaching the NGT for environmental violations, pollution, and ecological damage.", body: ["The National Green Tribunal (NGT) was established in 2010 to handle cases relating to environmental protection and conservation of forests and natural resources.", "Any person can file an application before the NGT if they are aggrieved by an environmental violation. You do not need to be directly affected — public interest matters too.", "Applications can be filed online at the NGT's official portal or physically at its principal bench in New Delhi or regional benches in Bhopal, Pune, Kolkata, and Chennai."], keyPoints: ["No court fee for filing — accessible to all citizens", "Cases must be filed within 6 months of the cause of action", "NGT can award compensation and order restoration", "Cases are decided within 6 months as a general rule", "Lawyer not mandatory for filing"], related: ["National Green Tribunal Act, 2010", "NGT (Practices & Procedure) Rules, 2011"] },
+    { title: "Air & Water Pollution Control Laws", excerpt: "Understanding the Air Act 1981 and Water Act 1974 — your rights against industrial and vehicular pollution.", body: ["The Water (Prevention and Control of Pollution) Act, 1974 and the Air (Prevention and Control of Pollution) Act, 1981 are the two key laws regulating pollution in India.", "State Pollution Control Boards (SPCBs) are responsible for granting consents to industries and monitoring pollution levels.", "Citizens can file complaints with the SPCB if an industry is discharging pollutants beyond permissible limits."], keyPoints: ["Industries need 'Consent to Operate' from SPCB", "You can report pollution violations to your State PCB", "Penalties include cancellation of industry consent", "Vehicular pollution is also regulated under Air Act", "Central Pollution Control Board sets national standards"], related: ["Water Act, 1974", "Air Act, 1981", "Environment (Protection) Act, 1986"] },
+    { title: "Forest Rights & Conservation Laws", excerpt: "Rights of forest-dwelling communities and protections under the Forest Rights Act and Wildlife Protection Act.", body: ["The Forest Rights Act, 2006 recognises the rights of Scheduled Tribes and traditional forest dwellers who have been living in forests for generations.", "It grants individual rights (to farm and reside) and community rights (over common forest land, water bodies, and biodiversity).", "The Wildlife Protection Act, 1972 protects endangered species and regulates trade in wildlife — violation can attract heavy penalties and imprisonment."], keyPoints: ["Forest dwellers have legal rights to their land under FRA 2006", "Gram Sabhas play a key role in recognising forest rights", "Poaching or trading in wildlife is a serious criminal offence", "Protected areas cannot be diverted without consent of Gram Sabha", "Rights can be claimed by filing with the Forest Rights Committee"], related: ["Forest Rights Act, 2006", "Wildlife Protection Act, 1972", "Indian Forest Act, 1927"] },
+    { title: "Solid Waste & Plastic Ban Rules", excerpt: "What India's solid waste management rules and single-use plastic ban mean for citizens and businesses.", body: ["The Solid Waste Management Rules, 2016 mandate that waste generators — households, businesses, and institutions — must segregate waste at source into dry, wet, and hazardous categories.", "India's Single-Use Plastic Prohibition Rules, 2022 banned the manufacture, import, stocking, and sale of identified single-use plastic items from July 1, 2022.", "Local bodies are responsible for enforcement, and violators can be fined. Citizens can report violations to their municipality or on the CPCB's complaint portal."], keyPoints: ["Waste must be segregated into wet, dry & hazardous at home", "Single-use plastics like straws, cups, cutlery are banned", "Violators face fines as set by local municipal bodies", "Extended Producer Responsibility applies to plastic manufacturers", "Report violations at your local municipal corporation"], related: ["Solid Waste Management Rules, 2016", "Plastic Waste Management Rules, 2016 (Amended 2022)", "Environment (Protection) Act, 1986"] },
+    { title: "Climate Change & India's Legal Commitments", excerpt: "India's obligations under the Paris Agreement, NDCs, and domestic climate legislation.", body: ["India ratified the Paris Agreement in 2016 and has committed to Nationally Determined Contributions (NDCs) — including reducing emissions intensity of GDP by 45% by 2030 from 2005 levels.", "While India does not yet have a standalone climate law, climate considerations are integrated into the Environment Protection Act and various sector-specific laws.", "The Energy Conservation (Amendment) Act, 2022 introduced carbon trading mechanisms and obligations for industries to meet renewable energy requirements."], keyPoints: ["India targets Net Zero by 2070", "500 GW renewable energy target by 2030", "Carbon Credit Trading Scheme introduced in 2022", "Industries face mandatory energy efficiency targets", "Citizens can engage in public consultations on environmental clearances"], related: ["Paris Agreement, 2016", "Energy Conservation (Amendment) Act, 2022", "National Action Plan on Climate Change"] },
+    { title: "Environmental Impact Assessment (EIA)", excerpt: "What is EIA, when is it required, and how citizens can participate in public hearings before major projects are approved.", body: ["An Environmental Impact Assessment (EIA) is a process to evaluate the likely environmental impacts of a proposed project before it is approved by the government.", "Under the EIA Notification, 2006, projects like mines, highways, thermal plants, and large industries must obtain environmental clearance from MoEFCC.", "Citizens have the right to participate in mandatory public hearings before clearance is granted, and can raise objections to projects that may harm their environment or livelihoods."], keyPoints: ["EIA is mandatory for large-scale infrastructure and industrial projects", "Public hearings must be held before environmental clearance", "Citizens can submit written objections during the public consultation period", "Clearance can be challenged before the NGT", "Projects without clearance can be stopped and penalised"], related: ["EIA Notification, 2006", "Environment (Protection) Act, 1986", "National Green Tribunal Act, 2010"] },
+    { title: "Noise Pollution Laws & Your Rights", excerpt: "Legal limits on noise from vehicles, firecrackers, loudspeakers, and industries — and how to complain.", body: ["The Noise Pollution (Regulation and Control) Rules, 2000 set limits for ambient noise levels in residential, commercial, industrial, and silence zones.", "Use of loudspeakers or public address systems requires prior permission from authorities. Between 10 PM and 6 AM, loudspeakers are generally prohibited.", "Citizens can file complaints about noise pollution with the local police, the district administration, or the State Pollution Control Board."], keyPoints: ["Residential zones: max 55 dB (day) / 45 dB (night)", "Silence zones (near hospitals, schools): max 50 dB (day) / 40 dB (night)", "Loudspeakers after 10 PM are prohibited without special permission", "Firecrackers banned in silence zones", "Complaints can be filed with police or State PCB"], related: ["Noise Pollution (Regulation and Control) Rules, 2000", "Environment (Protection) Act, 1986", "IPC Section 268 (Public Nuisance)"] },
+    { title: "Hazardous Waste Management Rules", excerpt: "How hazardous waste from industries is regulated in India and what citizens can do if illegal dumping occurs near them.", body: ["The Hazardous and Other Wastes (Management and Transboundary Movement) Rules, 2016 regulate the generation, storage, transport, and disposal of hazardous waste by industries.", "Industries must obtain authorisation from the State Pollution Control Board for handling hazardous waste. Unauthorised disposal of hazardous waste is a criminal offence.", "If you witness illegal dumping of chemical or industrial waste, you can file a complaint with your State PCB, the NGT, or through the CPCB's online grievance portal."], keyPoints: ["Industries need SPCB authorisation to handle hazardous waste", "Illegal dumping can lead to imprisonment up to 7 years", "Citizens can report illegal dumping to State PCB or NGT", "Generators of hazardous waste are responsible for its safe disposal", "Import of hazardous waste is strictly regulated"], related: ["Hazardous Waste Management Rules, 2016", "Environment (Protection) Act, 1986", "Basel Convention on Hazardous Wastes"] }
+  ];
+
+  const grid = document.getElementById('cardsGrid');
+  const overlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+
+  articles.forEach((a, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h3>${a.title}</h3><p>${a.excerpt}</p><a class="read-link" href="#">Read Article →</a>`;
+    card.addEventListener('click', () => openModal(i));
+    grid.appendChild(card);
+  });
+
+  function openModal(i) {
+    const a = articles[i];
+    document.getElementById('modalCategory').textContent = 'Environmental Laws';
+    document.getElementById('modalTitle').textContent = a.title;
+    const body = document.getElementById('modalBody');
+    body.innerHTML = '';
+    a.body.forEach(para => { const p = document.createElement('p'); p.textContent = para; body.appendChild(p); });
+    const kp = document.createElement('div');
+    kp.className = 'key-points';
+    kp.innerHTML = `<div class="key-points-title">📌 Key Points</div><ul>${a.keyPoints.map(k=>`<li>${k}</li>`).join('')}</ul>`;
+    body.appendChild(kp);
+    const rel = document.createElement('div');
+    rel.className = 'related-section';
+    rel.innerHTML = `<div class="related-title">📚 Related Laws &amp; Acts</div><div class="tags">${a.related.map(r=>`<span class="tag">${r}</span>`).join('')}</div>`;
+    body.appendChild(rel);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

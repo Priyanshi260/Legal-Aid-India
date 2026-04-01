@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taxation Laws – Legal Aid India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy-dark: #0d1f3b; --navy-mid: #1a3a6b; --navy-light: #2a5fa8; --gold: #c9973a; --bg: #f4f5f8; --card-bg: #ffffff; --text-dark: #1a1f2b; --text-mid: #3d4a6a; --text-muted: #6b7a9c; --accent: #b5452a; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-dark); min-height: 100vh; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; padding: 14px 28px; font-size: 0.85rem; color: rgba(255,255,255,0.8); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+    .back-link:hover { color: #fff; }
+    .hero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 55%, var(--navy-light) 100%); position: relative; overflow: hidden; padding: 0 0 56px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(42,95,168,0.35) 0%, transparent 65%); }
+    .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding: 10px 32px 0; display: flex; align-items: center; gap: 32px; }
+    .hero-icon { font-size: 4.5rem; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); animation: float 3.5s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.15; }
+    .hero-text p { color: rgba(255,255,255,0.82); font-size: 1rem; line-height: 1.65; max-width: 520px; margin-bottom: 22px; }
+    .articles-badge { display: inline-block; background: var(--gold); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border-radius: 4px; }
+    .main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+    .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid #dde0e8; padding-bottom: 10px; margin-bottom: 32px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .card { background: var(--card-bg); border: 1px solid #e2e4ea; border-radius: 10px; padding: 28px 26px 24px; cursor: pointer; transition: box-shadow 0.25s, transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+    .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy-mid), var(--navy-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .card:hover { box-shadow: 0 8px 28px rgba(13,31,59,0.13); transform: translateY(-3px); border-color: var(--navy-light); }
+    .card:hover::after { transform: scaleX(1); }
+    .card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--navy-dark); margin-bottom: 10px; line-height: 1.35; }
+    .card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 18px; }
+    .read-link { font-size: 0.85rem; font-weight: 600; color: var(--navy-mid); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s, color 0.2s; }
+    .read-link:hover { color: var(--navy-dark); gap: 8px; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,15,35,0.55); backdrop-filter: blur(3px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 14px; max-width: 620px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 36px 36px 40px; position: relative; box-shadow: 0 24px 64px rgba(0,0,0,0.2); animation: slideUp 0.25s ease; }
+    @keyframes slideUp { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
+    .modal-close { position: absolute; top: 18px; right: 20px; background: #eef0f5; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background 0.2s; }
+    .modal-close:hover { background: #d5d8e5; }
+    .modal-category { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-light); margin-bottom: 10px; }
+    .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 20px; line-height: 1.3; }
+    .modal-body p { font-size: 0.93rem; color: var(--text-mid); line-height: 1.72; margin-bottom: 14px; }
+    .key-points { background: #f0f2f8; border-left: 4px solid var(--navy-light); border-radius: 8px; padding: 20px 22px; margin: 24px 0; }
+    .key-points-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .key-points ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .key-points ul li { font-size: 0.88rem; color: var(--text-dark); padding-left: 18px; position: relative; line-height: 1.5; }
+    .key-points ul li::before { content: '•'; color: var(--navy-light); position: absolute; left: 0; }
+    .related-section { margin-top: 24px; }
+    .related-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: #eef0f5; border: 1px solid #d4d8e5; color: var(--text-mid); font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; }
+    @media (max-width: 600px) { .hero-inner { flex-direction: column; gap: 16px; text-align: center; } .hero-text h1 { font-size: 2rem; } .modal { padding: 28px 20px 32px; } }
+  </style>
+</head>
+<body>
+<section class="hero">
+  <a href="index.html" class="back-link">← Back to Home</a>
+  <div class="hero-inner">
+    <div class="hero-icon">🧾</div>
+    <div class="hero-text">
+      <h1>Taxation Laws</h1>
+      <p>Understand India's tax system — income tax, GST, TDS, and your rights as a taxpayer. Learn how to file returns, respond to notices, and claim refunds.</p>
+      <span class="articles-badge">9 Articles</span>
+    </div>
+  </div>
+</section>
+<main class="main">
+  <div class="section-label">Articles &amp; Guides</div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</main>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-category" id="modalCategory"></div>
+    <h2 id="modalTitle"></h2>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<script>
+  const articles = [
+    { title: "Income Tax Act, 1961 — Basics for Citizens", excerpt: "An overview of India's primary income tax law — who must pay, what is taxable, and the role of the Income Tax Department.", body: ["The Income Tax Act, 1961 is the primary law governing direct taxation in India. It defines what constitutes income, the rates of tax, exemptions, and deductions available to individuals and entities.", "Individuals with annual income above the basic exemption limit are required to file income tax returns. The limit is ₹2.5 lakh under the old regime and ₹3 lakh under the new regime.", "The Income Tax Department is responsible for collecting taxes, processing returns, and issuing refunds. The department operates under the Central Board of Direct Taxes (CBDT)."], keyPoints: ["Income from salary, business, property, capital gains & other sources is taxable", "PAN (Permanent Account Number) is mandatory for filing", "New Tax Regime offers lower rates with fewer exemptions", "Old Tax Regime allows deductions under Sections 80C, 80D etc.", "Failure to file returns can attract penalties and interest"], related: ["Income Tax Act, 1961", "Finance Act (Annual)", "CBDT Circulars & Notifications"] },
+    { title: "How to File Your Income Tax Return (ITR)", excerpt: "Step-by-step guide to filing your ITR online — forms, deadlines, and what to do if you miss the due date.", body: ["Income Tax Returns (ITR) must be filed annually on the Income Tax e-Filing portal (incometax.gov.in). The due date for salaried individuals is generally July 31 of the assessment year.", "Choosing the right ITR form is critical — ITR-1 (Sahaj) is for salaried individuals with income up to ₹50 lakh, while other forms apply to those with business income, capital gains, or foreign assets.", "If you miss the due date, you can still file a belated return by December 31 of the assessment year, but a late fee of up to ₹5,000 applies."], keyPoints: ["Deadline: July 31 for salaried individuals", "Belated return can be filed until December 31 with a late fee", "Form 26AS and AIS show all tax credits and financial transactions", "E-verification is mandatory within 30 days of filing", "Refunds are processed directly to your bank account"], related: ["Income Tax Act, 1961 — Section 139", "CBDT ITR Forms", "Income Tax Rules, 1962"] },
+    { title: "GST — Goods and Services Tax Explained", excerpt: "What GST is, how it works, and your rights as a consumer and business owner under the GST regime.", body: ["GST (Goods and Services Tax), introduced in 2017, is a unified indirect tax replacing a web of central and state taxes. It is levied on the supply of goods and services across India.", "GST operates on a dual structure — CGST and SGST for intra-state transactions, and IGST for inter-state transactions.", "Businesses with an annual turnover above ₹40 lakh (₹20 lakh for services) must register under GST and file regular returns."], keyPoints: ["GST has 4 main slabs: 5%, 12%, 18%, and 28%", "Essential goods like food grains are exempt from GST", "Input Tax Credit (ITC) allows businesses to offset GST paid on purchases", "Consumers can verify GST bills on the GST portal", "Anti-profiteering rules ensure GST savings are passed to consumers"], related: ["Central Goods and Services Tax Act, 2017", "Integrated GST Act, 2017", "GST Rules, 2017"] },
+    { title: "TDS — Tax Deducted at Source", excerpt: "Understanding TDS — when it applies, how to check your TDS credits, and what to do if TDS is wrongly deducted.", body: ["TDS (Tax Deducted at Source) is a mechanism where tax is deducted by the payer at the time of making certain payments — salary, rent, professional fees, interest, and more.", "The deducted TDS is deposited with the government and credited to your Form 26AS and Annual Information Statement (AIS), which you can check on the income tax portal.", "If excess TDS is deducted, you can claim a refund while filing your ITR. If TDS is not deposited by the deductor, you can file a grievance with the Income Tax Department."], keyPoints: ["TDS rates range from 1% to 30% depending on the payment type", "Check your TDS credits in Form 26AS before filing ITR", "Deductor must issue Form 16 / 16A as TDS certificate", "Excess TDS is refunded when you file your ITR", "Non-deduction of TDS attracts penalty on the deductor"], related: ["Income Tax Act, 1961 — Chapter XVII-B", "Form 26AS", "TDS Rules under Income Tax Rules, 1962"] },
+    { title: "Your Rights as a Taxpayer", excerpt: "The Taxpayers' Charter and your statutory rights — privacy, fair treatment, appeals, and grievance redressal.", body: ["The Income Tax Department launched the Taxpayers' Charter in 2020, which outlines the rights and obligations of taxpayers. It is a commitment by the department to treat taxpayers fairly and with respect.", "Taxpayers have the right to be informed, the right to be heard, the right to appeal against assessment orders, and the right to fair, courteous, and reasonable treatment.", "If you disagree with an assessment order, you can file an appeal before the Commissioner of Income Tax (Appeals) and subsequently before the Income Tax Appellate Tribunal (ITAT)."], keyPoints: ["Right to fair, courteous, and reasonable treatment", "Right to complete, accurate, and timely information", "Right to appeal against any assessment or demand", "Right to confidentiality of your tax information", "Grievances can be filed on the e-Nivaran portal"], related: ["Taxpayers' Charter, 2020", "Income Tax Act, 1961 — Section 246A (Appeals)", "ITAT Rules, 1963"] },
+    { title: "Responding to an Income Tax Notice", excerpt: "Types of tax notices, why you may receive one, and how to respond correctly without panicking.", body: ["Receiving an income tax notice can be alarming, but most notices are routine and require simple responses. Common notices include Section 143(1) (intimation), Section 139(9) (defective return), and Section 148 (reassessment).", "Always check the notice on the official e-Filing portal to verify its authenticity. Fake tax notices are common — genuine notices always have a Document Identification Number (DIN).", "Respond within the time limit mentioned in the notice. You can reply online through the e-Filing portal under the 'e-Proceedings' section. Ignoring a notice can lead to ex-parte assessment."], keyPoints: ["Always verify notice authenticity using DIN on incometax.gov.in", "Respond within the deadline — extensions can be requested", "Keep all supporting documents ready before responding", "Section 143(1) intimation is not an audit — just a mismatch alert", "Consult a CA for notices under Section 148 (reassessment)"], related: ["Income Tax Act, 1961 — Section 143, 148, 156", "CBDT SOPs on Notices", "e-Filing Portal Guidelines"] },
+    { title: "Tax Saving Deductions — Section 80C & Beyond", excerpt: "How to legally reduce your tax liability using deductions under Section 80C, 80D, 80G, and other provisions.", body: ["Section 80C of the Income Tax Act allows individuals to claim deductions up to ₹1.5 lakh per year on investments and expenses like PPF, ELSS, life insurance premiums, home loan principal, and tuition fees.", "Section 80D provides deductions for health insurance premiums — up to ₹25,000 for self and family, and an additional ₹25,000 for parents (₹50,000 if parents are senior citizens).", "Other useful deductions include 80G (donations to charities), 80E (education loan interest), 80TTA (interest on savings accounts up to ₹10,000), and 80CCD(1B) (additional NPS contribution up to ₹50,000)."], keyPoints: ["80C deduction limit: ₹1.5 lakh per year", "PPF, ELSS, LIC premium, home loan principal qualify under 80C", "80D covers health insurance for self, family & parents", "80G allows deductions for donations to approved charities", "These deductions are only available under the Old Tax Regime"], related: ["Income Tax Act, 1961 — Chapter VI-A", "Section 80C, 80D, 80G, 80E", "CBDT Notifications on Approved Funds"] },
+    { title: "Capital Gains Tax — Selling Property & Investments", excerpt: "How profits from selling property, stocks, or mutual funds are taxed under Indian law.", body: ["Capital gains tax applies when you sell a capital asset — such as property, shares, or mutual funds — for a profit. The tax rate depends on how long you held the asset.", "Short-term capital gains (STCG) arise when assets are sold within the holding period threshold (e.g., within 2 years for property, 1 year for listed shares). Long-term capital gains (LTCG) arise beyond these periods.", "LTCG on sale of listed shares above ₹1 lakh is taxed at 10%. LTCG on property is taxed at 20% with indexation benefit. STCG on listed shares is taxed at 15%."], keyPoints: ["LTCG on listed shares above ₹1 lakh taxed at 10%", "STCG on listed shares taxed at 15%", "LTCG on property taxed at 20% with indexation", "Reinvesting in property or bonds can save capital gains tax (Section 54)", "Capital losses can be set off against capital gains"], related: ["Income Tax Act, 1961 — Sections 45–55A", "Section 54, 54EC (Capital Gains Exemption)", "Finance Act amendments on capital gains"] },
+    { title: "GST for Small Businesses & Composition Scheme", excerpt: "How small businesses can benefit from the GST Composition Scheme — lower compliance, flat tax rates, and eligibility criteria.", body: ["The GST Composition Scheme is a simplified tax scheme for small businesses with annual turnover up to ₹1.5 crore (₹75 lakh for some states). It allows them to pay a flat tax rate instead of regular GST.", "Under the scheme, businesses pay 1% (traders), 2% (manufacturers), or 5% (restaurants) of their turnover as GST, with much simpler quarterly filing requirements.", "However, composition dealers cannot collect GST from customers, cannot claim Input Tax Credit, and cannot make inter-state supplies. It suits purely local businesses with low margins."], keyPoints: ["Eligible for businesses with turnover up to ₹1.5 crore", "Flat tax rate: 1% for traders, 2% for manufacturers, 5% for restaurants", "Only one quarterly return (CMP-08) required instead of monthly", "Cannot issue GST invoices or collect GST from customers", "Cannot claim Input Tax Credit on purchases"], related: ["CGST Act, 2017 — Section 10", "Composition Levy Rules, 2017", "GST Council Notifications"] }
+  ];
+
+  const grid = document.getElementById('cardsGrid');
+  const overlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+
+  articles.forEach((a, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h3>${a.title}</h3><p>${a.excerpt}</p><a class="read-link" href="#">Read Article →</a>`;
+    card.addEventListener('click', () => openModal(i));
+    grid.appendChild(card);
+  });
+
+  function openModal(i) {
+    const a = articles[i];
+    document.getElementById('modalCategory').textContent = 'Taxation Laws';
+    document.getElementById('modalTitle').textContent = a.title;
+    const body = document.getElementById('modalBody');
+    body.innerHTML = '';
+    a.body.forEach(para => { const p = document.createElement('p'); p.textContent = para; body.appendChild(p); });
+    const kp = document.createElement('div');
+    kp.className = 'key-points';
+    kp.innerHTML = `<div class="key-points-title">📌 Key Points</div><ul>${a.keyPoints.map(k=>`<li>${k}</li>`).join('')}</ul>`;
+    body.appendChild(kp);
+    const rel = document.createElement('div');
+    rel.className = 'related-section';
+    rel.innerHTML = `<div class="related-title">📚 Related Laws &amp; Acts</div><div class="tags">${a.related.map(r=>`<span class="tag">${r}</span>`).join('')}</div>`;
+    body.appendChild(rel);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
