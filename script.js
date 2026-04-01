@@ -114,6 +114,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+    const currentUserKey = 'legalAidCurrentUser';
+
+    const getCurrentUser = () => {
+        try {
+            return JSON.parse(localStorage.getItem(currentUserKey) || 'null');
+        } catch {
+            return null;
+        }
+    };
+
+    const setCurrentUser = (user) => {
+        localStorage.setItem(currentUserKey, JSON.stringify(user));
+    };
+
+    const clearCurrentUser = () => {
+        localStorage.removeItem(currentUserKey);
+    };
+
+    window.updateAuthButton = () => {
+        const authButton = document.getElementById('authButton');
+        const user = getCurrentUser();
+        if (!authButton) return;
+
+        if (user && user.name) {
+            authButton.innerText = `👋 Hi ${user.name}`;
+            authButton.title = 'Click to logout';
+        } else {
+            authButton.innerText = '🔒 Login / Sign Up';
+            authButton.title = 'Login / Sign Up';
+        }
+    };
+
+    window.handleAuthAction = () => {
+        const user = getCurrentUser();
+        if (user && user.name) {
+            const confirmLogout = confirm('Logout ' + user.name + ' ?');
+            if (confirmLogout) {
+                clearCurrentUser();
+                updateAuthButton();
+                showToast('Logged out successfully.');
+            }
+        } else {
+            window.location.href = 'login.html';
+        }
+    };
+
     window.showToast = (message) => {
         const oldToast = document.querySelector('.toast');
         if (oldToast) oldToast.remove();
@@ -127,4 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => toast.remove(), 500);
         }, 3000);
     };
+
+    updateAuthButton();
 });

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Sign Up — Legal Aid India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-emblem">⚖️</div>
+        <div>
+          <div class="logo-text">Legal Aid India</div>
+          <span class="logo-sub">Justice For All</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="AboutUs/aboutUs.html">About Us</a></li>
+        <li><a href="Kyr.html">Know Rights</a></li>
+        <li><a href="ask-index.html">Ask</a></li>
+        <li><button id="authButton" class="btn-nav-login" onclick="handleAuthAction()">🔒 Login / Sign Up</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-head">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>Welcome back</h1>
+        <p>Login to access your legal dashboard</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="loginTab" class="auth-tab active">Login</button>
+        <button id="signUpTab" class="auth-tab">Create Account</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active">
+        <label for="loginEmail">Email or Mobile Number</label>
+        <input id="loginEmail" type="text" placeholder="you@example.com or 9XXXXXXXXX" required />
+
+        <label for="loginPassword">Password</label>
+        <div class="input-with-icon">
+          <input id="loginPassword" type="password" placeholder="Enter your password" required />
+          <span class="eye-icon" onclick="togglePassword('loginPassword')">👁️</span>
+        </div>
+
+        <a href="#" class="forgot-link">Forgot password?</a>
+        <button type="submit" class="btn-primary">Login to My Account →</button>
+      </form>
+
+      <form id="signUpForm" class="auth-form">
+        <label for="signName">Full Name</label>
+        <input id="signName" type="text" placeholder="Your full name" required />
+
+        <label for="signEmail">Email</label>
+        <input id="signEmail" type="email" placeholder="you@example.com" required />
+
+        <label for="signPassword">Password</label>
+        <div class="input-with-icon">
+          <input id="signPassword" type="password" placeholder="Create a strong password" required />
+          <span class="eye-icon" onclick="togglePassword('signPassword')">👁️</span>
+        </div>
+
+        <label for="signConfirm">Confirm Password</label>
+        <input id="signConfirm" type="password" placeholder="Confirm your password" required />
+
+        <button type="submit" class="btn-primary">Create Account →</button>
+      </form>
+
+      <div class="auth-footer">or continue with</div>
+      <div class="social-grid">
+        <button class="social-btn">Google</button>
+        <button class="social-btn">Facebook</button>
+        <button class="social-btn">Apple</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const loginTab = document.getElementById('loginTab');
+    const signUpTab = document.getElementById('signUpTab');
+    const loginForm = document.getElementById('loginForm');
+    const signUpForm = document.getElementById('signUpForm');
+
+    function setTab(tab) {
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        signUpTab.classList.remove('active');
+        loginForm.classList.add('active');
+        signUpForm.classList.remove('active');
+      } else {
+        loginTab.classList.remove('active');
+        signUpTab.classList.add('active');
+        loginForm.classList.remove('active');
+        signUpForm.classList.add('active');
+      }
+    }
+
+    loginTab.addEventListener('click', () => setTab('login'));
+    signUpTab.addEventListener('click', () => setTab('signup'));
+
+    const togglePassword = (id) => {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    };
+
+    const userStoreKey = 'legalAidUsers';
+    const currentUserKey = 'legalAidCurrentUser';
+
+    const getUsers = () => {
+      try {
+        return JSON.parse(localStorage.getItem(userStoreKey) || '[]');
+      } catch {
+        return [];
+      }
+    };
+
+    const setUsers = (arr) => localStorage.setItem(userStoreKey, JSON.stringify(arr));
+
+    const getCurrentUser = () => {
+      try {
+        return JSON.parse(localStorage.getItem(currentUserKey) || 'null');
+      } catch {
+        return null;
+      }
+    };
+
+    const setCurrentUser = (user) => {
+      localStorage.setItem(currentUserKey, JSON.stringify(user));
+    };
+
+    const clearCurrentUser = () => {
+      localStorage.removeItem(currentUserKey);
+    };
+
+    const showMessage = (msg) => {
+      alert(msg);
+    };
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!username || !password) {
+        showMessage('Please enter both email/mobile and password.');
+        return;
+      }
+
+      const users = getUsers();
+      const found = users.find((u) => u.email.toLowerCase() === username.toLowerCase() || u.mobile === username);
+
+      if (!found) {
+        showMessage('No account found. Please sign up first.');
+        setTab('signup');
+        return;
+      }
+
+      if (found.password !== password) {
+        showMessage('Invalid password. Try again.');
+        return;
+      }
+
+      setCurrentUser({ name: found.name, email: found.email });
+      showMessage('Login successful. Redirecting to homepage...');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 650);
+    });
+
+    signUpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signName').value.trim();
+      const email = document.getElementById('signEmail').value.trim().toLowerCase();
+      const password = document.getElementById('signPassword').value;
+      const confirm = document.getElementById('signConfirm').value;
+
+      if (!name || !email || !password || !confirm) {
+        showMessage('All fields are required for account creation.');
+        return;
+      }
+
+      if (password !== confirm) {
+        showMessage('Passwords must match.');
+        return;
+      }
+
+      const users = getUsers();
+      const exists = users.some((u) => u.email === email);
+
+      if (exists) {
+        showMessage('An account with this email already exists. Please log in.');
+        setTab('login');
+        return;
+      }
+
+      users.push({ name, email, password });
+      setUsers(users);
+
+      showMessage('Account created successfully! Please log in.');
+      setTab('login');
+      loginForm.reset();
+      signUpForm.reset();
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

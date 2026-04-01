@@ -12,7 +12,8 @@
     .back-link { display: inline-flex; align-items: center; gap: 6px; padding: 14px 28px; font-size: 0.85rem; color: rgba(255,255,255,0.8); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
     .back-link:hover { color: #fff; }
     .hero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 55%, var(--navy-light) 100%); position: relative; overflow: hidden; padding: 0 0 56px; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(42,95,168,0.35) 0%, transparent 65%); }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(42,95,168,0.35) 0%, transparent 65%); pointer-events: none; }
+    .back-link { z-index: 2; position: relative; }
     .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding: 10px 32px 0; display: flex; align-items: center; gap: 32px; }
     .hero-icon { font-size: 4.5rem; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); animation: float 3.5s ease-in-out infinite; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }

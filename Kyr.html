@@ -44,6 +44,9 @@
       position: relative;
       overflow: hidden;
     }
+    .back-link { position: absolute; top: 20px; left: 22px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; background: rgba(255,255,255,0.92); color: #236b46; text-decoration: none; font-weight: 700; border: 1px solid rgba(35,107,70,0.28); box-shadow: 0 8px 18px rgba(0,0,0,0.12); z-index: 10; }
+    .back-link:hover { background: #fff; }
+    }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -447,6 +450,7 @@
 
 <!-- HERO -->
 <header class="hero">
+  <a href="index.html" class="back-link">← Back to Home</a>
   <h1>Know Your Rights</h1>
   <p class="hero-sub"><strong>Empowering You:</strong> Understanding Your Fundamental Rights and Freedoms</p>
 </header>

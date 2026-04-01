@@ -258,6 +258,32 @@
     .topic-name { font-size: 14px; font-weight: 500; color: var(--text-dark); flex: 1; transition: color var(--transition); }
     .topic-item:hover .topic-name { color: var(--teal); }
     .topic-arrow { color: var(--border); font-size: 16px; transition: color var(--transition), transform var(--transition); }
+
+/* ── AUTH PAGE */
+.auth-page { min-height: calc(100vh - 68px); display: flex; justify-content: center; align-items: center; padding: 34px 16px; background: radial-gradient(circle at top, #0f1a32 0%, #091222 55%, #040a16 100%); }
+.auth-card { width: min(470px, 100%); background: #0b1630; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; box-shadow: 0 26px 60px rgba(0,0,0,0.42); padding: 26px; color: #fff; }
+.auth-head { margin-bottom: 20px; }
+.auth-head .back-link { color: #cfd9eb; font-size: 13px; display: inline-block; margin-bottom: 12px; }
+.auth-head h1 { font-size: 30px; line-height: 1.1; margin-bottom: 8px; }
+.auth-head p { color: rgba(228,233,244,0.78); font-size: 14px; }
+.auth-tabs { display: flex; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; overflow: hidden; margin-bottom: 18px; background: rgba(255,255,255,0.04); }
+.auth-tab { flex: 1; text-align: center; padding: 12px 8px; color: #dfe7f5; border: none; background: transparent; font-weight: 700; cursor: pointer; transition: background 0.22s ease, color 0.22s ease; }
+.auth-tab.active { background: linear-gradient(135deg, #e5a557, #f5c778); color: #10203a; }
+.auth-form { display: none; animation: fadeIn 0.35s ease; }
+.auth-form.active { display: block; }
+.auth-form label { color: rgba(243,247,255,0.9); font-size: 12px; margin-top: 10px; display: block; letter-spacing: 0.4px; }
+.auth-form input { width: 100%; height: 44px; margin-top: 7px; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; background: rgba(8,15,32,0.55); padding: 0 14px; color: #fff; outline: none; }
+.auth-form input::placeholder { color: rgba(234,241,255,0.65); }
+.input-with-icon { position: relative; }
+.eye-icon { position: absolute; top: 50%; right: 14px; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
+.forgot-link { display: inline-block; margin: 10px 0 12px 0; color: #8bacdd; font-size: 13px; }
+.btn-primary { width: 100%; background: linear-gradient(135deg, #f7ab43, #f6c44f); color: #10203a; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; padding: 14px; margin-top: 10px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 22px rgba(0,0,0,0.25); }
+.auth-footer { margin-top: 16px; text-align: center; color: rgba(233,241,255,0.76); font-size: 13px; }
+.social-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; margin-top: 10px; }
+.social-btn { background: rgba(255,255,255,0.08); color: #f1f5ff; border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; height: 40px; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; }
+.social-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
     .topic-item:hover .topic-arrow { color: var(--teal); transform: translateX(3px); }
 
     /* Help card */
