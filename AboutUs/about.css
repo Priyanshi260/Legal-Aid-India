@@ -1,0 +1,160 @@
+:root {
+    --primary: #0d2c47;
+    --secondary: #17714b;
+    --accent: #ff9800;
+    --light-bg: #f4f7f6;
+    --text: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Nav */
+.nav-simple {
+    padding: 20px;
+    background: var(--primary);
+}
+
+.nav-simple a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Hero */
+.about-hero {
+    background: linear-gradient(rgba(13, 44, 71, 0.8), rgba(23, 113, 75, 0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200') no-repeat center/cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+/* Story Section */
+.story-section {
+    padding: 80px 0;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.story-text h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.story-text p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.story-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-item {
+    background: var(--light-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-item span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+/* Team Section */
+.team-section {
+    background-color: var(--light-bg);
+    padding: 80px 0;
+}
+
+.center-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: var(--primary);
+}
+
+.team-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.profile-box {
+    background: #fff;
+    flex: 1 1 calc(25% - 20px);
+    min-width: 250px;
+    padding: 40px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.profile-box:hover {
+    transform: translateY(-10px);
+}
+
+.profile-header h3 {
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.profile-header span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.profile-contact {
+    margin-top: 25px;
+    list-style: none;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.profile-contact li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 2.5rem; }
+}
